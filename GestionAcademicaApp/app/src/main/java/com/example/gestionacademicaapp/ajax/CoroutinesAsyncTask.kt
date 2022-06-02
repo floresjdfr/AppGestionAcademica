@@ -20,7 +20,7 @@ abstract class CoroutinesAsyncTask<Progress, Result>(val taskName: String) {
     var bgJob: Deferred<Result>? = null
     abstract fun doInBackground(): Result
     open fun onProgressUpdate(vararg values: Progress?) {}
-    open fun onPostExecute(result: Result?, postExecuteCallBack: (Result) -> Unit) {}
+    open fun onPostExecute(result: Result?): Result? {return result}
     open fun onPreExecute() {}
     open fun onCancelled(result: Result?) {}
     protected var isCancelled = false
@@ -29,22 +29,23 @@ abstract class CoroutinesAsyncTask<Progress, Result>(val taskName: String) {
      * Executes background task parallel with other background tasks in the queue using
      * default thread pool
      */
-    fun execute(postExcecuteCallback: (Result) -> Unit) {
-        execute(Dispatchers.Default, postExcecuteCallback)
+    fun execute(): Result? {
+        return execute(Dispatchers.Default)
     }
 
     /**
      * Executes background tasks sequentially with other background tasks in the queue using
      * single thread executor @Executors.newSingleThreadExecutor().
      */
-    fun executeOnExecutor(postExcecuteCallback: (Result) -> Unit) {
+    fun executeOnExecutor(): Result? {
         if (threadPoolExecutor == null) {
             threadPoolExecutor = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
         }
-        execute(threadPoolExecutor!!, postExcecuteCallback)
+        return execute(threadPoolExecutor!!)
     }
 
-    private fun execute(dispatcher: CoroutineDispatcher, postExcecuteCallback: (Result) -> Unit) {
+    private fun execute(dispatcher: CoroutineDispatcher): Result? {
+        var result: Result? = null
         if (status != Status.PENDING) {
             when (status) {
                 Status.RUNNING -> throw IllegalStateException("Cannot execute task:" + " the task is already running.")
@@ -74,13 +75,13 @@ abstract class CoroutinesAsyncTask<Progress, Result>(val taskName: String) {
             preJob!!.join()
             if (!isCancelled) {
                 withContext(Dispatchers.Main) {
-                    onPostExecute(bgJob!!.await(), postExcecuteCallback)
+                    result = onPostExecute(bgJob!!.await())
                     printLog("$taskName doInBackground finished")
                     status = Status.FINISHED
                 }
             }
         }
-
+        return result
     }
 
     fun cancel(mayInterruptIfRunning: Boolean) {

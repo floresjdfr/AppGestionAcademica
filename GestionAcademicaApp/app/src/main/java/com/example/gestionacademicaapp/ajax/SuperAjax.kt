@@ -2,7 +2,7 @@ package com.example.gestionacademicaapp.ajax
 
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
-import java.net.HttpURLConnection.HTTP_OK
+
 
 /**
  * Class that helps to execute ajax requests
@@ -13,16 +13,16 @@ import java.net.HttpURLConnection.HTTP_OK
  * @param bodyJson
  * @param properties properties that can be added to the request
  */
-class Ajax(
+class SuperAjax(
     private val url: String,
     private val ajaxMethod: AjaxMethod,
     private val doInput: Boolean? = null,
     private val doOutput: Boolean? = null,
     private val bodyJson: String = "",
     private val properties: ArrayList<Pair<String, String>> = ArrayList<Pair<String, String>>()
-) : CoroutinesAsyncTask<Void, HttpResponse>("Ajax") {
+){
 
-    private fun httpRequest(): HttpResponse {
+    private suspend fun httpRequest(): HttpResponse {
         val response = HttpResponse()
         var conn: HttpURLConnection? = null
         try {
@@ -44,7 +44,7 @@ class Ajax(
 
             var responseCode = conn.responseCode
 
-            var responseBody: String = if(responseCode == HTTP_OK)
+            var responseBody: String = if(responseCode == HttpURLConnection.HTTP_OK)
                 conn.inputStream.bufferedReader().use { it.readText() }
             else
                 conn.errorStream.bufferedReader().use { it.readText() }
@@ -67,11 +67,7 @@ class Ajax(
         return doOutput ?: (ajaxMethod == AjaxMethod.POST || ajaxMethod == AjaxMethod.PUT)
     }
 
-    override fun doInBackground(): HttpResponse {
+    suspend fun execute(): HttpResponse {
         return this.httpRequest()
     }
-}
-
-enum class AjaxMethod {
-    GET, POST, PUT, DELETE
 }

@@ -8,8 +8,7 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.databinding.ActivityLoginBinding
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -24,18 +23,23 @@ class LoginActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
     }
 
-    fun login(view: View){
-            viewModel.login {
-                if(viewModel.isLogged){
-                    val username = viewModel.getUser().value?.UserID
-                    Toast.makeText(this, "Logged username: $username", Toast.LENGTH_LONG).show()
+    fun login(view: View) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val loggedResult = viewModel.login()
+            withContext(Dispatchers.Main) {
+                if (loggedResult) {
+                    Toast.makeText(
+                        view.context,
+                        "Username: ${viewModel.getUser().value?.UserID} has being logged",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(view.context, "Username or password incorrect", Toast.LENGTH_LONG).show()
                 }
-
-                else
-                    Toast.makeText(this, "Username or Password incorrect", Toast.LENGTH_LONG).show()
+                println("Changing view finished")
             }
-
-
-
+            println("Login request finished")
+        }
+        println("Login finished")
     }
 }
