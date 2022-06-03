@@ -1,11 +1,10 @@
-package com.example.gestionacademicaapp.ajax
+package com.example.gestionacademicaapp.models
 
-class HttpResponse {
+class HttpResponse constructor() : Base() {
     var responseCode: Int? = null
     var responseBody: String? = null
 
-    constructor(){}
-    constructor(responseCode: Int, responseBody: String){
+    constructor(responseCode: Int, responseBody: String) : this(){
         this.responseCode = responseCode
         this.responseBody = responseBody
     }

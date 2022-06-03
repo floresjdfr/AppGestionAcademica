@@ -10,8 +10,8 @@ internal class Connect {
             val conn = url.openConnection() as HttpURLConnection
 
             //PROPS
-            conn.connectTimeout = 15000
-            conn.readTimeout = 15000
+            conn.connectTimeout = 5000
+            conn.readTimeout = 5000
 
             return conn;
         }

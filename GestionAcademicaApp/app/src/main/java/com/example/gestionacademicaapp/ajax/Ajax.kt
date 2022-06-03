@@ -1,5 +1,6 @@
 package com.example.gestionacademicaapp.ajax
 
+import com.example.gestionacademicaapp.models.HttpResponse
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.HttpURLConnection.HTTP_OK

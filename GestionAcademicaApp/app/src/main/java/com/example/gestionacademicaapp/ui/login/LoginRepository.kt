@@ -1,43 +1,52 @@
 package com.example.gestionacademicaapp.ui.login
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.gestionacademicaapp.ajax.Ajax
 import com.example.gestionacademicaapp.ajax.AjaxMethod
-import com.example.gestionacademicaapp.ajax.HttpResponse
 import com.example.gestionacademicaapp.ajax.SuperAjax
 import com.example.gestionacademicaapp.models.User
 import com.google.gson.Gson
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import java.net.HttpURLConnection.*
+import java.net.HttpURLConnection.HTTP_OK
+import com.example.gestionacademicaapp.models.Error
+import com.example.gestionacademicaapp.models.HttpResponse
+import com.example.gestionacademicaapp.models.Response
 
-class LoginRepository : ViewModel() {
-    private val _user: MutableLiveData<User> = MutableLiveData(User())
-    private val apiUrl = "http://192.168.100.22:45061/api/User/Login/"
-    var isLogged = false
 
-    fun getUser(): LiveData<User>{
-        return _user
-    }
-    fun setUser(user: User){
-        _user.value = user
-    }
+class LoginRepository {
+    lateinit var viewModel: LoginVM
+    private val apiUrl = "http://192.168.100.7:5000/api/User/Login/"
 
-    suspend fun login(): Boolean {
-        var loggedUser: User? = null
-        isLogged = false
+    suspend fun login(): Response {
+        val response = Response()
+        val loggedUser: User?
+        viewModel.isLogged = false
 
-        val httpResponse = SuperAjax(apiUrl, AjaxMethod.POST, bodyJson = Gson().toJson(_user.value)).execute()
+        val properties = ArrayList<Pair<String, String>>()
+        properties.add(Pair("Content-Type", "application/json"))
+        val json = Gson().toJson(viewModel.getUser().value)
 
-        if (httpResponse.responseCode == HTTP_OK) {
-            loggedUser = Gson().fromJson(httpResponse.responseBody, User::class.java)
-            _user.postValue(loggedUser)
-            isLogged = true
-            return true
+        val httpResponse =
+            SuperAjax(apiUrl, AjaxMethod.POST, properties = properties, bodyJson = json).execute()
+
+        if(httpResponse.javaClass.simpleName == Error::class.simpleName){
+            val apiResponse = httpResponse as Error
+            response.Code = -1
+            response.Content = apiResponse
         }
-        return false
+        else{
+            val apiResponse = httpResponse as HttpResponse
+            if (apiResponse.responseCode == HTTP_OK){
+                loggedUser = Gson().fromJson(httpResponse.responseBody, User::class.java)
+
+                viewModel.setUser(loggedUser)
+                viewModel.isLogged = true
+
+                response.Code = 1
+                response.Content = loggedUser
+            }
+            else{
+                response.Code = 1
+                response.Content = null
+            }
+        }
+        return response
     }
 }

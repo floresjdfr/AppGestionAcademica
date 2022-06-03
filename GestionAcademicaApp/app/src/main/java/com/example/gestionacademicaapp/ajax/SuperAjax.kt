@@ -1,7 +1,10 @@
 package com.example.gestionacademicaapp.ajax
 
+import com.example.gestionacademicaapp.models.Base
+import com.example.gestionacademicaapp.models.HttpResponse
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
+import com.example.gestionacademicaapp.models.Error
 
 
 /**
@@ -22,15 +25,14 @@ class SuperAjax(
     private val properties: ArrayList<Pair<String, String>> = ArrayList<Pair<String, String>>()
 ){
 
-    private suspend fun httpRequest(): HttpResponse {
-        val response = HttpResponse()
+    private suspend fun httpRequest(): Base {
+        var response = Base()
         var conn: HttpURLConnection? = null
         try {
             conn = Connect.connect(url)
             conn.requestMethod = ajaxMethod.toString()
             conn.doInput = setDoInput()
             conn.doOutput = setDoOutput()
-            conn.setRequestProperty("Content-Type", "application/json")
 
             properties.forEach {
                 conn.addRequestProperty(it.first, it.second)
@@ -49,12 +51,13 @@ class SuperAjax(
             else
                 conn.errorStream.bufferedReader().use { it.readText() }
 
+            response = HttpResponse()
             response.responseCode = responseCode
             response.responseBody = responseBody
 
         } catch (ex: Exception) {
-            response.responseCode = conn?.responseCode
-            response.responseBody = ex.message
+            response = Error()
+            response.ErrorMessage = ex.message
         }
         return response
     }
@@ -67,7 +70,7 @@ class SuperAjax(
         return doOutput ?: (ajaxMethod == AjaxMethod.POST || ajaxMethod == AjaxMethod.PUT)
     }
 
-    suspend fun execute(): HttpResponse {
+    suspend fun execute(): Base {
         return this.httpRequest()
     }
 }
