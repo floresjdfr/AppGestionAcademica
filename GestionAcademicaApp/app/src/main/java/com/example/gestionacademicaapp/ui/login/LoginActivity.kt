@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        viewModel = ViewModelProvider(this).get(LoginVM::class.java)
+        viewModel = ViewModelProvider(this)[LoginVM::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         repository.viewModel = viewModel

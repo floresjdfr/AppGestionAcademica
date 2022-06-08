@@ -5,14 +5,28 @@
       <map>
         <entry key="..\:/Proyectos/Kotlin/GestionAcademicaApp/app/src/main/res/layout/activity_login.xml" value="0.3625" />
         <entry key="..\:/Proyectos/Kotlin/GestionAcademicaApp/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Proyectos/Moviles/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_course.xml" value="0.22826086956521738" />
+        <entry key="..\:/Proyectos/Moviles/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/career/layout/template_course.xml" value="0.22826086956521738" />
+        <entry key="..\:/Proyectos/Moviles/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/course/layout/template_course.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/flore/Documents/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/drawable/ic_login_avatar.xml" value="0.2703125" />
         <entry key="..\:/Users/flore/Documents/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/flore/Documents/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/drawable/ic_add_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/drawable/ic_login.xml" value="0.1" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/career/layout/activity_career.xml" value="0.1" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/login/layout/activity_login.xml" value="0.1" />
       </map>
     </option>
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://$PROJECT_DIR$/app" />
+    <file type="web" url="file://$PROJECT_DIR$/app/build/generated/source/kapt/debug" />
+    <file type="web" url="file://$PROJECT_DIR$/app/build/generated/source/kapt/debugAndroidTest" />
+    <file type="web" url="file://$PROJECT_DIR$/app/build/generated/source/kapt/debugUnitTest" />
+    <file type="web" url="file://$PROJECT_DIR$/app/build/generated/source/kaptKotlin/debug" />
+    <file type="web" url="file://$PROJECT_DIR$/app/build/generated/source/kaptKotlin/debugAndroidTest" />
+    <file type="web" url="file://$PROJECT_DIR$/app/build/generated/source/kaptKotlin/debugUnitTest" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="jbr-11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

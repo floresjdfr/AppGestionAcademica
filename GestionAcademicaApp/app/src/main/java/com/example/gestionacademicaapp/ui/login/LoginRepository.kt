@@ -12,7 +12,7 @@ import com.example.gestionacademicaapp.models.Response
 
 class LoginRepository {
     lateinit var viewModel: LoginVM
-    private val apiUrl = "http://10.0.2.2:5000/api/User/Login/"
+    private val apiUrl = "http://10.0.2.2:45061/api/User/Login/"
 
     suspend fun login(): Response {
         val response = Response()

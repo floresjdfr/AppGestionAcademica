@@ -15,6 +15,7 @@
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
         <item name="materialButtonStyle">@style/Theme.GestionAcademicaApp.Button</item>
         <item name="android:typeface">sans</item>
+        <item name="floatingActionButtonStyle">@style/Theme.GestionAcademicaApp.FloatingButton</item>
 
     </style>
     
@@ -24,4 +25,10 @@
         <item name="height">46dp</item>
         <item name="android:textAllCaps">false</item>
     </style>
+
+    <style name="Theme.GestionAcademicaApp.FloatingButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/primaryDark</item>
+        <item name="tint">@color/white</item>
+    </style>
+
 </resources>

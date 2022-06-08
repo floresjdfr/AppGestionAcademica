@@ -1,12 +1,12 @@
 package com.example.gestionacademicaapp.models
 
-class User : Base, java.io.Serializable{
+class User : Base, java.io.Serializable {
 
     var UserType: UserType? = null
     var UserID: String? = null
     var Password: String? = null
 
-    constructor(){}
+    constructor() {}
     constructor(id: Int, username: String, password: String, userType: EnumUserType) {
         this.ID = id
         this.UserID = username
