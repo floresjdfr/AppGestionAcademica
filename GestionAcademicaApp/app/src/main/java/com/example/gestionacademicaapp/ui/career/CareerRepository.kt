@@ -5,7 +5,7 @@ import com.example.gestionacademicaapp.models.Response
 
 class CareerRepository {
     lateinit var viewModel: CareerVM
-    private val apiUrl = ""
+    private val apiUrl = "http://10.0.2.2:5000/api/Career/"
 
     suspend fun fetchCareers(): Response {
         var response = Response()

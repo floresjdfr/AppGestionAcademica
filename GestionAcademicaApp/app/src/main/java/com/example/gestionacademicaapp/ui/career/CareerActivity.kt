@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 
 class CareerActivity : AppCompatActivity() {
     private lateinit var recyclerViewElement: RecyclerView
-    private lateinit var adapter: CareerRecyclerViewAdapter
+    private lateinit var adapter: CareerAdapterRV
     private lateinit var dataBinding: ActivityCareerBinding
     private var careerRepository = CareerRepository()
     lateinit var viewModel: CareerVM
@@ -52,7 +52,7 @@ class CareerActivity : AppCompatActivity() {
                 for (p in viewModel.getCareerList().value!!) {
                     nCareerList.add(p)
                 }
-                adapter = CareerRecyclerViewAdapter(nCareerList)
+                adapter = CareerAdapterRV(nCareerList)
                 recyclerViewElement.adapter = adapter
             }
         }

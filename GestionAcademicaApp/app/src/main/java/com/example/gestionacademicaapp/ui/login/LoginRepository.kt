@@ -12,7 +12,7 @@ import com.example.gestionacademicaapp.models.Response
 
 class LoginRepository {
     lateinit var viewModel: LoginVM
-    private val apiUrl = "http://10.0.2.2:45061/api/User/Login/"
+    private val apiUrl = "http://10.0.2.2:5000/api/User/Login"
 
     suspend fun login(): Response {
         val response = Response()
@@ -21,19 +21,19 @@ class LoginRepository {
 
         val properties = ArrayList<Pair<String, String>>()
         properties.add(Pair("Content-Type", "application/json"))
+        properties.add(Pair("Accept", "application/json"))
         val json = Gson().toJson(viewModel.getUser().value)
 
         val httpResponse =
             SuperAjax(apiUrl, AjaxMethod.POST, properties = properties, bodyJson = json).execute()
 
-        if(httpResponse.javaClass.simpleName == Error::class.simpleName){
+        if (httpResponse.javaClass.simpleName == Error::class.simpleName) {
             val apiResponse = httpResponse as Error
             response.Code = -1
             response.Content = apiResponse
-        }
-        else{
+        } else {
             val apiResponse = httpResponse as HttpResponse
-            if (apiResponse.responseCode == HTTP_OK){
+            if (apiResponse.responseCode == HTTP_OK) {
                 loggedUser = Gson().fromJson(httpResponse.responseBody, User::class.java)
 
                 viewModel.setUser(loggedUser)
@@ -41,8 +41,7 @@ class LoginRepository {
 
                 response.Code = 1
                 response.Content = loggedUser
-            }
-            else{
+            } else { // Wrong username or password
                 response.Code = 1
                 response.Content = null
             }

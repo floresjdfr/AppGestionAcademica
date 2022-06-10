@@ -10,7 +10,7 @@ import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.models.Career
 import kotlinx.android.synthetic.main.template_career.view.*
 
-class CareerRecyclerViewAdapter(items: ArrayList<Career>) : RecyclerView.Adapter<ViewHolder>() {
+class CareerAdapterRV(items: ArrayList<Career>) : RecyclerView.Adapter<ViewHolder>() {
 
     var itemsList: ArrayList<Career>? = null
 
