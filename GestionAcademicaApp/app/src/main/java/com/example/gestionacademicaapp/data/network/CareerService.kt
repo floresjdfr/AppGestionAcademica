@@ -18,4 +18,23 @@ class CareerService {
                 ArrayList()
         }
     }
+    suspend fun createCareer(career: CareerModel): Boolean {
+        return withContext(Dispatchers.IO) {
+            val response = retrofit.create(CareerApiClient::class.java).createCareer(career)
+            if (response.isSuccessful)
+                response.body()!!
+            else
+                false
+        }
+    }
+
+    suspend fun deleteCareer(id: Int): Boolean{
+        return withContext(Dispatchers.IO){
+            val response = retrofit.create(CareerApiClient::class.java).deleteCareer(id)
+            if(response.isSuccessful)
+                response.body()!!
+            else
+                false
+        }
+    }
 }

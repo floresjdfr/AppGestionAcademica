@@ -36,10 +36,10 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src\\main\\res',
-                        'src\\main\\res\\layouts\\login',
+                srcDirs 'src\\main\\res\\layouts\\login',
                         'src\\main\\res\\layouts\\career',
-                        'src\\main\\res\\layouts\\navdrawer'
+                        'src\\main\\res\\layouts\\navdrawer',
+                        'src\\main\\res'
             }
         }
     }

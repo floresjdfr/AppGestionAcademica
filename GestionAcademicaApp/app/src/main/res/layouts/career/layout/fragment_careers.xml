@@ -15,8 +15,7 @@
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:layout_gravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:onClick="addNewCareer" />
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <ScrollView
         android:layout_width="match_parent"

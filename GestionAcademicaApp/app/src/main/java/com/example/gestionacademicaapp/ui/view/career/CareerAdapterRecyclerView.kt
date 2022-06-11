@@ -39,4 +39,18 @@ class CareerAdapterRecyclerView(items: List<CareerModel>) : RecyclerView.Adapter
         holder.itemView.recyclerview_career_id.text = item?.Code
         holder.itemView.recyclerview_career_name.text = item?.CareerName
     }
+
+    fun getAtPosition(position: Int): CareerModel?{
+        return itemsList?.get(position)
+    }
+
+    fun deleteAtPosition(position: Int){
+        var auxList = ArrayList<CareerModel>()
+        var elementToDelete = itemsList?.get(position)
+        itemsList?.forEach {
+            if(it.ID != elementToDelete?.ID)
+                auxList.add((it))
+        }
+        itemsList = auxList
+    }
 }

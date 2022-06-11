@@ -11,5 +11,12 @@ class CareerRepository {
         suspend fun getCareers(): ArrayList<CareerModel>{
             return api.getCareers()
         }
+        suspend fun createCareer(career: CareerModel): Boolean{
+            return api.createCareer(career)
+        }
+
+        suspend fun deleteCareer(id: Int): Boolean{
+            return api.deleteCareer(id)
+        }
     }
 }

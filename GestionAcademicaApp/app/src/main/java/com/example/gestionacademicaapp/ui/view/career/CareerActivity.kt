@@ -9,6 +9,7 @@ import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.databinding.ActivityCareerBinding
 import com.example.gestionacademicaapp.ui.viewmodel.CareerViewModel
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
+import kotlinx.android.synthetic.main.activity_career.*
 import kotlinx.android.synthetic.main.nav_fragment_container.*
 import kotlinx.android.synthetic.main.nav_fragment_container.view.*
 
@@ -36,12 +38,18 @@ class CareerActivity : AppCompatActivity(), OnNavigationItemSelectedListener {
 
         binding.navView.setNavigationItemSelectedListener(this)
 
+        supportActionBar?.title = "Create Career"
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CareersFragment()).commit()
-        supportActionBar?.title = "Careers"
-    }
 
+    }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
+        when (item.itemId) {
+            R.id.nav_item_careers -> {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CareersFragment()).commit()
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 
 
