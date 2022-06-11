@@ -1,4 +1,4 @@
-package com.example.gestionacademicaapp.ui.career
+package com.example.gestionacademicaapp.ui.view.career
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.gestionacademicaapp.R
-import com.example.gestionacademicaapp.models.Career
+import com.example.gestionacademicaapp.data.model.CareerModel
 import kotlinx.android.synthetic.main.template_career.view.*
 
-class CareerAdapterRV(items: ArrayList<Career>) : RecyclerView.Adapter<ViewHolder>() {
+class CareerAdapterRecyclerView(items: List<CareerModel>) : RecyclerView.Adapter<ViewHolder>() {
 
-    var itemsList: ArrayList<Career>? = null
+    var itemsList: List<CareerModel>? = null
 
     lateinit var mcontext: Context
 
