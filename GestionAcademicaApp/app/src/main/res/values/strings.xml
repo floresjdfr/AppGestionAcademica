@@ -13,4 +13,5 @@
     <string name="save">Save</string>
     <string name="information">Information</string>
     <string name="courses">Courses</string>
+    <string name="new_course">New Course</string>
 </resources>

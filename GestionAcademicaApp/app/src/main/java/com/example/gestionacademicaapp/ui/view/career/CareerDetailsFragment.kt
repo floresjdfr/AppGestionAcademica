@@ -4,25 +4,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.gestionacademicaapp.R
+import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.databinding.FragmentCareerDetailsBinding
 import com.example.gestionacademicaapp.ui.view.course.CoursesFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.nav_fragment_container.*
 
 
 class CareerDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentCareerDetailsBinding
+    private lateinit var career: CareerModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
         binding = FragmentCareerDetailsBinding.inflate(inflater, container, false)
-        initListeners()
 
+        var careerArg = arguments?.getSerializable("career")
+        career = careerArg as CareerModel
+
+        initListeners()
+        initInfoFragment()
         return binding.root
     }
 
@@ -30,10 +36,12 @@ class CareerDetailsFragment : Fragment() {
         binding.careerBottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.career_info -> {
-                    parentFragmentManager.beginTransaction().replace(R.id.career_details_container, CareerInfoFragment()).commit()
+                    (activity as AppCompatActivity).toolbar.title = "Career Information"
+                    initInfoFragment()
                     true
                 }
                 R.id.career_courses -> {
+                    (activity as AppCompatActivity).toolbar.title = "Courses"
                     parentFragmentManager.beginTransaction().replace(R.id.career_details_container, CoursesFragment()).commit()
                     true
                 }
@@ -41,4 +49,15 @@ class CareerDetailsFragment : Fragment() {
             }
         }
     }
+
+    private fun initInfoFragment(){
+        val bundle = Bundle()
+        val fragment = CareerInfoFragment()
+
+        bundle.putSerializable("career", career)
+        fragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction().replace(R.id.career_details_container, fragment).commit()
+    }
+
 }

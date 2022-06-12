@@ -38,13 +38,14 @@ class CareerActivity : AppCompatActivity(), OnNavigationItemSelectedListener {
 
         binding.navView.setNavigationItemSelectedListener(this)
 
-        supportActionBar?.title = "Create Career"
+        toolbar.title = "Careers"
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CareersFragment()).commit()
 
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_item_careers -> {
+                toolbar.title = "Careers"
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CareersFragment()).commit()
             }
         }

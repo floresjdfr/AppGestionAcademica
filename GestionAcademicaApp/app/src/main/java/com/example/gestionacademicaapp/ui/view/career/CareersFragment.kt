@@ -19,6 +19,7 @@ import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.databinding.FragmentCareersBinding
 import com.example.gestionacademicaapp.ui.viewmodel.CareerViewModel
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+import kotlinx.android.synthetic.main.nav_fragment_container.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -70,13 +71,22 @@ class CareersFragment : Fragment() {
         recyclerViewElement.adapter = adapter
         adapter.setOnClickListener(object: CareerAdapterRecyclerView.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, CareerDetailsFragment()).commit()
+                val career = adapter.getAtPosition(position)
+                val bundle = Bundle()
+                val fragment = CareerDetailsFragment()
+
+                bundle.putSerializable("career", career)
+                fragment.arguments = bundle
+
+                activity?.toolbar?.title = "Career Information"
+                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
             }
         })
     }
 
     private fun initListeners() {
         binding.addCareer.setOnClickListener {
+            activity?.toolbar?.title = "Create Career"
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container, CreateCareerFragment()).commit()
         }
     }
@@ -124,10 +134,6 @@ class CareersFragment : Fragment() {
         }
     }
 
-    private fun onItemClick(position: Int) {
-        Toast.makeText(context, position, Toast.LENGTH_SHORT).show()
-    }
-
     private fun deleteItem(position: Int) {
         AlertDialog.Builder(context)
             .setMessage("Are you sure you want to delete this item?")
@@ -162,6 +168,7 @@ class CareersFragment : Fragment() {
                     val fragment = CreateCareerFragment()
                     fragment.arguments = bundle
 
+                    activity?.toolbar?.title = "Edit Career"
                     parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
                 }
             }
