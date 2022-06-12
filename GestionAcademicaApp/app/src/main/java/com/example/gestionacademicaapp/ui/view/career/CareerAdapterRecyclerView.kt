@@ -13,19 +13,33 @@ import kotlinx.android.synthetic.main.template_career.view.*
 class CareerAdapterRecyclerView(items: List<CareerModel>) : RecyclerView.Adapter<ViewHolder>() {
 
     var itemsList: List<CareerModel>? = null
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
+    }
 
-    lateinit var mcontext: Context
+    private lateinit var mContext: Context
+    private lateinit var mListener: OnItemClickListener
 
-    class CareerHolder(itemView: View) : ViewHolder(itemView)
+    class CareerHolder(itemView: View, listener: OnItemClickListener) : ViewHolder(itemView){
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
+    }
 
     init {
         this.itemsList = items
     }
 
+    fun setOnClickListener(listener: OnItemClickListener){
+        mListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val careerListView = LayoutInflater.from(parent.context).inflate(R.layout.template_career, parent, false)
-        val sch = CareerHolder(careerListView)
-        mcontext = parent.context
+        val sch = CareerHolder(careerListView, mListener)
+        mContext = parent.context
         return sch
     }
 

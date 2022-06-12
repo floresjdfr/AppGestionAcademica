@@ -2,13 +2,13 @@ package com.example.gestionacademicaapp.ui.view.career
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Canvas
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.databinding.FragmentCareersBinding
 import com.example.gestionacademicaapp.ui.viewmodel.CareerViewModel
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,12 +62,19 @@ class CareersFragment : Fragment() {
             binding.progress.isVisible = it
         }
     }
+
     private fun initAdapter() {
         viewModel.getCareers()
         var nCareerList = viewModel.careers.value!!
         adapter = CareerAdapterRecyclerView(nCareerList)
         recyclerViewElement.adapter = adapter
+        adapter.setOnClickListener(object: CareerAdapterRecyclerView.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, CareerDetailsFragment()).commit()
+            }
+        })
     }
+
     private fun initListeners() {
         binding.addCareer.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container, CreateCareerFragment()).commit()
@@ -77,6 +85,7 @@ class CareersFragment : Fragment() {
         0,
         ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
     ) {
+
         override fun onMove(
             recyclerView: RecyclerView,
             viewHolder: RecyclerView.ViewHolder,
@@ -90,9 +99,33 @@ class CareersFragment : Fragment() {
             if (direction == ItemTouchHelper.LEFT) { //Delete
                 deleteItem(position)
             } else { //Edit
-                Toast.makeText(context, "Position: $position", Toast.LENGTH_SHORT).show()
+                editItem(position)
             }
         }
+
+        override fun onChildDraw(
+            c: Canvas,
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            dX: Float,
+            dY: Float,
+            actionState: Int,
+            isCurrentlyActive: Boolean,
+        ) {
+            RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                .addSwipeLeftBackgroundColor(ContextCompat.getColor(context!!, R.color.secondaryDark))
+                .addSwipeLeftActionIcon(R.drawable.ic_trash)
+                .addSwipeRightBackgroundColor(ContextCompat.getColor(context!!, R.color.primaryLight))
+                .addSwipeRightActionIcon(R.drawable.ic_pencil)
+                .create()
+                .decorate()
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+        }
+    }
+
+    private fun onItemClick(position: Int) {
+        Toast.makeText(context, position, Toast.LENGTH_SHORT).show()
     }
 
     private fun deleteItem(position: Int) {
@@ -102,13 +135,34 @@ class CareersFragment : Fragment() {
                 CoroutineScope(Dispatchers.Main).launch {
                     var itemToDelete = adapter.getAtPosition(position)?.ID!!
                     val response = viewModel.deleteCareer(itemToDelete)
-                    if(response){
+                    if (response) {
                         adapter.deleteAtPosition(position)
                         adapter.notifyItemRemoved(position)
-                    }
-                    else{
+                    } else {
                         adapter.notifyItemChanged(position)
                     }
+                }
+            }
+            .setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
+                adapter.notifyItemChanged(position)
+            }
+            .create()
+            .show()
+    }
+
+    private fun editItem(position: Int) {
+        AlertDialog.Builder(context)
+            .setMessage("Are you sure you want to edit this item?")
+            .setPositiveButton("Edit") { _: DialogInterface, _: Int ->
+                CoroutineScope(Dispatchers.Main).launch {
+                    val itemToEdit = adapter.getAtPosition(position)!!
+
+                    val bundle = Bundle()
+                    bundle.putSerializable("career", itemToEdit)
+                    val fragment = CreateCareerFragment()
+                    fragment.arguments = bundle
+
+                    parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
                 }
             }
             .setNegativeButton("Cancel") { _: DialogInterface, _: Int ->

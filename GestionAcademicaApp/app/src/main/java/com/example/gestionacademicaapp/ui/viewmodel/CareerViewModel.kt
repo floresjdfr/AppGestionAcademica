@@ -27,7 +27,14 @@ class CareerViewModel : ViewModel() {
         isLoading.postValue(false)
     }
 
-    suspend fun deleteCareer(id: Int): Boolean{
+    suspend fun deleteCareer(id: Int): Boolean {
         return CareerRepository.deleteCareer(id)
+    }
+
+    suspend fun updateCareer(id: Int, career: CareerModel): Boolean {
+        isLoading.postValue(true)
+        var result = CareerRepository.updateCareer(id, career)
+        isLoading.postValue(false)
+        return result
     }
 }

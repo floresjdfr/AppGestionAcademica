@@ -37,4 +37,14 @@ class CareerService {
                 false
         }
     }
+
+    suspend fun updateCareer(id: Int, career: CareerModel): Boolean{
+        return withContext(Dispatchers.IO){
+            val response = retrofit.create(CareerApiClient::class.java).updateCareer(id, career)
+            if(response.isSuccessful)
+                response.body()!!
+            else
+                false
+        }
+    }
 }

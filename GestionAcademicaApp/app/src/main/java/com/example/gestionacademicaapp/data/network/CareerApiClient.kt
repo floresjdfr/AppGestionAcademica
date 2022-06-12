@@ -3,11 +3,7 @@ package com.example.gestionacademicaapp.data.network
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.model.UserModel
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface CareerApiClient {
     @GET("Career")
@@ -18,4 +14,7 @@ interface CareerApiClient {
 
     @DELETE("Career/{id}")
     suspend fun deleteCareer(@Path("id") id: Int): Response<Boolean>
+
+    @PUT("Career/{id}")
+    suspend fun updateCareer(@Path("id") id: Int, @Body career: CareerModel):Response<Boolean>
 }

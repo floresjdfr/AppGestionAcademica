@@ -14,7 +14,7 @@ object RetrofitHelper {
 
     fun getRetrofit(): Retrofit = Retrofit
         .Builder()
-        .baseUrl("http://10.0.2.2:5000/api/")
+        .baseUrl("http://192.168.100.11:5000/api/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(getClient())
         .build()
