@@ -17,6 +17,7 @@ class CareerDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentCareerDetailsBinding
     private lateinit var career: CareerModel
+    private var preferredShowedFragment: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,11 +25,14 @@ class CareerDetailsFragment : Fragment() {
     ): View? {
         binding = FragmentCareerDetailsBinding.inflate(inflater, container, false)
 
-        var careerArg = arguments?.getSerializable("career")
+        val careerArg = arguments?.getSerializable("career")
         career = careerArg as CareerModel
 
+        val preferredFragmentArg = arguments?.getSerializable("fragment")
+        if(preferredFragmentArg != null ) preferredShowedFragment = preferredFragmentArg as Int
+
         initListeners()
-        initInfoFragment()
+        initFragment()
         return binding.root
     }
 
@@ -42,12 +46,30 @@ class CareerDetailsFragment : Fragment() {
                 }
                 R.id.career_courses -> {
                     (activity as AppCompatActivity).toolbar.title = "Courses"
-                    parentFragmentManager.beginTransaction().replace(R.id.career_details_container, CoursesFragment()).commit()
+                    initCoursesFragment()
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    private fun initFragment(){
+       // preferredShowedFragment = null
+        if(preferredShowedFragment != null){
+            when(preferredShowedFragment){
+                1 -> {
+                    (activity as AppCompatActivity).toolbar.title = "Career Information"
+                    initInfoFragment()
+                }
+                2 -> {
+                   (activity as AppCompatActivity).toolbar.title = "Courses"
+                    initCoursesFragment()
+                }
+            }
+        }
+        (activity as AppCompatActivity).toolbar.title = "Career Information"
+        initInfoFragment()
     }
 
     private fun initInfoFragment(){
@@ -56,6 +78,17 @@ class CareerDetailsFragment : Fragment() {
 
         bundle.putSerializable("career", career)
         fragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction().replace(R.id.career_details_container, fragment).commit()
+    }
+
+    private fun initCoursesFragment(){
+        val bundle = Bundle()
+        val fragment = CoursesFragment()
+
+        bundle.putSerializable("career", career)
+        fragment.arguments = bundle
+
 
         parentFragmentManager.beginTransaction().replace(R.id.career_details_container, fragment).commit()
     }

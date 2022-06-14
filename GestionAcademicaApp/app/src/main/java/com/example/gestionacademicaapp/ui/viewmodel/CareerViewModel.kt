@@ -16,7 +16,8 @@ class CareerViewModel : ViewModel() {
         viewModelScope.launch {
             isLoading.postValue(true)
             var result = CareerRepository.getCareers()
-            careers.postValue(result)
+            //careers.postValue(result)
+            careers.value= result
             isLoading.postValue(false)
         }
     }

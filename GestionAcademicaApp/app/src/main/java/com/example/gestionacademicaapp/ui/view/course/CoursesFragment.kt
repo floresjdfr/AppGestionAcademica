@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gestionacademicaapp.R
+import com.example.gestionacademicaapp.data.model.CareerModel
+import com.example.gestionacademicaapp.data.model.CourseModel
 import com.example.gestionacademicaapp.databinding.FragmentCoursesBinding
 import com.example.gestionacademicaapp.ui.view.course.CourseAdapterRecyclerView
 import com.example.gestionacademicaapp.ui.viewmodel.CourseViewModel
@@ -24,40 +26,46 @@ import kotlinx.android.synthetic.main.nav_fragment_container.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class CoursesFragment : Fragment() {
 
     private lateinit var recyclerViewElement: RecyclerView
     private lateinit var adapter: CourseAdapterRecyclerView
-
+    private lateinit var binding: FragmentCoursesBinding
+    private lateinit var career: CareerModel
     private val viewModel: CourseViewModel by viewModels()
 
-    private lateinit var binding: FragmentCoursesBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
 
         binding = FragmentCoursesBinding.inflate(inflater, container, false)
+        career = arguments?.getSerializable("career") as CareerModel
+
 
         recyclerViewElement = binding.courseRecyclerview
         recyclerViewElement.layoutManager = LinearLayoutManager(recyclerViewElement.context)
         recyclerViewElement.setHasFixedSize(true)
 
-        initAdapter()
-        initListeners()
-        initObservers()
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.getCourses(career.ID)
+            initAdapter()
+            initListeners()
+            initObservers()
 
-        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallBack)
-        itemTouchHelper.attachToRecyclerView(recyclerViewElement)
+            val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallBack)
+            itemTouchHelper.attachToRecyclerView(recyclerViewElement)
+        }
 
         return binding.root
     }
 
     private fun initObservers() {
         viewModel.courses.observe(this) {
-            adapter.itemsList = it
-            adapter.notifyDataSetChanged()
+            initAdapter(it)
         }
 
         viewModel.isLoading.observe(this) {
@@ -65,12 +73,11 @@ class CoursesFragment : Fragment() {
         }
     }
 
-    private fun initAdapter() {
-        viewModel.getCourses()
-        var nCourseList = viewModel.courses.value!!
+    private fun initAdapter(items: List<CourseModel>? = null) {
+        val nCourseList = if (!items.isNullOrEmpty()) items else emptyList()
         adapter = CourseAdapterRecyclerView(nCourseList)
         recyclerViewElement.adapter = adapter
-        adapter.setOnClickListener(object: CourseAdapterRecyclerView.OnItemClickListener{
+        adapter.setOnClickListener(object : CourseAdapterRecyclerView.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val course = adapter.getAtPosition(position)
 //                val bundle = Bundle()
@@ -87,8 +94,16 @@ class CoursesFragment : Fragment() {
 
     private fun initListeners() {
         binding.addCourse.setOnClickListener {
+            val bundle = Bundle()
+            val fragment = CreateCourseFragment()
+
+            bundle.putSerializable("career", career)
+            fragment.arguments = bundle
+
+
+
             activity?.toolbar?.title = "Create Course"
-//            parentFragmentManager.beginTransaction().replace(R.id.fragment_container, CreateCourseFragment()).commit()
+            parentFragmentManager.beginTransaction().replace(R.id.career_details_container, fragment).commit()
         }
     }
 

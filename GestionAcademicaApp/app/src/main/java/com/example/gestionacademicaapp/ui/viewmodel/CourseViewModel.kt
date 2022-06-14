@@ -3,6 +3,8 @@ package com.example.gestionacademicaapp.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gestionacademicaapp.data.model.CareerCourseModel
+import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.model.CourseModel
 import com.example.gestionacademicaapp.data.repository.CourseRepository
 import kotlinx.coroutines.CoroutineScope
@@ -12,18 +14,17 @@ import kotlinx.coroutines.launch
 class CourseViewModel : ViewModel() {
     val courses = MutableLiveData<ArrayList<CourseModel>>(ArrayList())
     val isLoading = MutableLiveData<Boolean>()
-    fun getCourses() {
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            var result = CourseRepository.getCourses()
-            courses.postValue(result)
-            isLoading.postValue(false)
-        }
+    suspend fun getCourses(id: Int) {
+        isLoading.postValue(true)
+        val result = CourseRepository.getCourses(id)
+        courses.postValue(result)
+//        courses.value = result
+        isLoading.postValue(false)
     }
 
-    suspend fun createCourse(career: CourseModel) {
+    suspend fun createCourse(careerCourseModel: CareerCourseModel) {
         isLoading.postValue(true)
-        var result = CourseRepository.createCourse(career)
+        var result = CourseRepository.createCourse(careerCourseModel)
         isLoading.postValue(false)
     }
 

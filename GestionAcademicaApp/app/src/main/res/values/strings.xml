@@ -14,4 +14,12 @@
     <string name="information">Information</string>
     <string name="courses">Courses</string>
     <string name="new_course">New Course</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="courseCode">Course Code</string>
+    <string name="courseName">Course Name</string>
+    <string name="courseCredits">Course Credits</string>
+    <string name="courseHours">Weekly Hours</string>
+    <string name="courseCycleYear">Cycle Year</string>
+    <string name="courseCycleNumber">Cycle Number</string>
 </resources>
