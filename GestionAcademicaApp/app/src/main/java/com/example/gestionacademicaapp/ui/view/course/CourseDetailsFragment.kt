@@ -1,4 +1,4 @@
-package com.example.gestionacademicaapp.ui.view.career
+package com.example.gestionacademicaapp.ui.view.course
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.example.gestionacademicaapp.ui.view.course.CoursesFragment
 import kotlinx.android.synthetic.main.nav_fragment_container.*
 
 
-class CareerDetailsFragment : Fragment() {
+class CourseDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentCareerDetailsBinding
     private lateinit var career: CareerModel

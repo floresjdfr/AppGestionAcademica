@@ -22,4 +22,5 @@
     <string name="courseHours">Weekly Hours</string>
     <string name="courseCycleYear">Cycle Year</string>
     <string name="courseCycleNumber">Cycle Number</string>
+    <string name="groups">Groups</string>
 </resources>

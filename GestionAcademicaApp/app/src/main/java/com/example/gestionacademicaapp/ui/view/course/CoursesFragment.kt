@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -19,14 +18,12 @@ import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.model.CourseModel
 import com.example.gestionacademicaapp.databinding.FragmentCoursesBinding
-import com.example.gestionacademicaapp.ui.view.course.CourseAdapterRecyclerView
 import com.example.gestionacademicaapp.ui.viewmodel.CourseViewModel
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.android.synthetic.main.nav_fragment_container.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class CoursesFragment : Fragment() {
 
@@ -45,19 +42,18 @@ class CoursesFragment : Fragment() {
         binding = FragmentCoursesBinding.inflate(inflater, container, false)
         career = arguments?.getSerializable("career") as CareerModel
 
-
         recyclerViewElement = binding.courseRecyclerview
         recyclerViewElement.layoutManager = LinearLayoutManager(recyclerViewElement.context)
         recyclerViewElement.setHasFixedSize(true)
 
+        initListeners()
+        initObservers()
+
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallBack)
+        itemTouchHelper.attachToRecyclerView(recyclerViewElement)
+
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.getCourses(career.ID)
-            initAdapter()
-            initListeners()
-            initObservers()
-
-            val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallBack)
-            itemTouchHelper.attachToRecyclerView(recyclerViewElement)
         }
 
         return binding.root
@@ -99,8 +95,6 @@ class CoursesFragment : Fragment() {
 
             bundle.putSerializable("career", career)
             fragment.arguments = bundle
-
-
 
             activity?.toolbar?.title = "Create Course"
             parentFragmentManager.beginTransaction().replace(R.id.career_details_container, fragment).commit()

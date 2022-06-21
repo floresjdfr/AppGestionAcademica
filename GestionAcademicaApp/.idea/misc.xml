@@ -9,6 +9,8 @@
         <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/drawable/ic_school_outline.xml" value="0.28125" />
         <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_career_info.xml" value="0.25104166666666666" />
         <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_career_information.xml" value="0.26510416666666664" />
+        <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_course_details.xml" value="0.27447916666666666" />
+        <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_course_info.xml" value="0.24048913043478262" />
         <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_create_course.xml" value="0.3625" />
         <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/career/layout/fragment_career_details.xml" value="0.18541666666666667" />
         <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/career/layout/fragment_career_info.xml" value="0.26510416666666664" />
@@ -21,6 +23,7 @@
         <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/course/layout/template_course.xml" value="0.35507246376811596" />
         <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/navdrawer/layout/nav_fragment_container.xml" value="0.35507246376811596" />
         <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/menu/bottom_nav_career.xml" value="0.2786458333333333" />
+        <entry key="..\:/GitHub/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/menu/bottom_nav_course.xml" value="0.2890625" />
         <entry key="..\:/Proyectos/Kotlin/GestionAcademicaApp/app/src/main/res/layout/activity_login.xml" value="0.3625" />
         <entry key="..\:/Proyectos/Kotlin/GestionAcademicaApp/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/Proyectos/Moviles/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_course.xml" value="0.22826086956521738" />

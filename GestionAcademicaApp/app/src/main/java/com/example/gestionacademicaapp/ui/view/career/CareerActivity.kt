@@ -1,29 +1,25 @@
 package com.example.gestionacademicaapp.ui.view.career
 
-import android.app.ActionBar
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import android.widget.Toolbar
-import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.databinding.ActivityCareerBinding
-import com.example.gestionacademicaapp.ui.viewmodel.CareerViewModel
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import kotlinx.android.synthetic.main.activity_career.*
 import kotlinx.android.synthetic.main.nav_fragment_container.*
 import kotlinx.android.synthetic.main.nav_fragment_container.view.*
 
-class CareerActivity : AppCompatActivity(), OnNavigationItemSelectedListener {
+class CareerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCareerBinding
+    private var selectedOption = R.id.nav_item_careers
+    private var toolbarText = "Careers"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,27 +27,47 @@ class CareerActivity : AppCompatActivity(), OnNavigationItemSelectedListener {
         setContentView(binding.root)
         setSupportActionBar(binding.navView.toolbar)
 
-        var toggle  = ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.open, R.string.close)
+        var toggle = ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.open, R.string.close)
         toggle.isDrawerIndicatorEnabled = true
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        binding.navView.setNavigationItemSelectedListener(this)
-
         toolbar.title = "Careers"
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CareersFragment()).commit()
 
+        //Set listenrs
+        drawerLayout.addDrawerListener(drawerListener)
+        binding.navView.setNavigationItemSelectedListener(navigationListener)
     }
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_item_careers -> {
-                toolbar.title = "Careers"
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CareersFragment()).commit()
+
+    var drawerListener = object : DrawerListener {
+        override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+
+        override fun onDrawerOpened(drawerView: View) {}
+
+        override fun onDrawerClosed(drawerView: View) {
+            when (selectedOption) {
+                R.id.nav_item_careers -> {
+                    toolbar.title = "Careers"
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CareersFragment())
+                        .commit()
+                }
             }
         }
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
+
+        override fun onDrawerStateChanged(newState: Int) {}
     }
+
+    var navigationListener =
+        OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_item_careers -> {
+                    selectedOption = R.id.nav_item_careers
+                }
+            }
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
 
 
 }
