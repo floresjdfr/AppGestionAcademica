@@ -14,7 +14,6 @@ import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.model.CourseModel
 import com.example.gestionacademicaapp.databinding.FragmentCreateCourseBinding
 import com.example.gestionacademicaapp.ui.view.career.CareerDetailsFragment
-import com.example.gestionacademicaapp.ui.view.career.CareerInfoFragment
 import com.example.gestionacademicaapp.ui.viewmodel.CourseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +25,7 @@ class CreateCourseFragment : Fragment() {
     private lateinit var binding: FragmentCreateCourseBinding
     private val viewModel: CourseViewModel by viewModels()
     private lateinit var career: CareerModel
-    private var editCourse: CourseModel? = null
+    private var editCareerCourse: CareerCourseModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,14 +35,14 @@ class CreateCourseFragment : Fragment() {
 
         val courseArg = arguments?.getSerializable("course")
         if (courseArg != null)
-            editCourse = courseArg as CourseModel
+            editCareerCourse = courseArg as CareerCourseModel
 
         career = arguments?.getSerializable("career") as CareerModel
 
 
         initObservers()
 
-        if (editCourse != null) { //Edit
+        if (editCareerCourse != null) { //Edit
             initEditListeners()
             initEditFields()
         } else { //Create
@@ -109,7 +108,7 @@ class CreateCourseFragment : Fragment() {
 
         val course = CourseModel(0, courseCode, courseName, courseCredits, courseHours)
         val careerCourse = CareerCourseModel(0, courseCycleYear, courseCycleNumber,course, career)
-        viewModel.createCourse(careerCourse)
+        viewModel.createCareerCourse(careerCourse)
     }
 
     private suspend fun editCourse(): Boolean {
@@ -121,7 +120,7 @@ class CreateCourseFragment : Fragment() {
 //        editCourse?.CourseName = courseName
 //        editCourse?.DegreeName = courseTitle
 
-        return viewModel.updateCourse(editCourse?.ID!!, editCourse!!)
+        return viewModel.updateCareerCourse(editCareerCourse!!)
     }
 
 }

@@ -1,26 +1,25 @@
-package com.example.gestionacademicaapp.data.network
+package com.example.gestionacademicaapp.data.network.course
 
 import com.example.gestionacademicaapp.core.RetrofitHelper
-import com.example.gestionacademicaapp.data.model.CareerModel
-import com.example.gestionacademicaapp.data.model.UserModel
+import com.example.gestionacademicaapp.data.model.CourseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class CareerService {
+class CourseService {
     private val retrofit = RetrofitHelper.getRetrofit()
 
-    suspend fun getCareers(): ArrayList<CareerModel> {
+    suspend fun getCourses(id: Int): ArrayList<CourseModel> {
         return withContext(Dispatchers.IO) {
-            val response = retrofit.create(CareerApiClient::class.java).getCareers()
+            val response = retrofit.create(CourseApiClient::class.java).getCourses()
             if (response.isSuccessful)
                 response.body()!!
             else
                 ArrayList()
         }
     }
-    suspend fun createCareer(career: CareerModel): Boolean {
+    suspend fun createCourse(course: CourseModel): Boolean {
         return withContext(Dispatchers.IO) {
-            val response = retrofit.create(CareerApiClient::class.java).createCareer(career)
+            val response = retrofit.create(CourseApiClient::class.java).createCourse(course)
             if (response.isSuccessful)
                 response.body()!!
             else
@@ -28,9 +27,9 @@ class CareerService {
         }
     }
 
-    suspend fun deleteCareer(id: Int): Boolean{
+    suspend fun deleteCourse(id: Int): Boolean{
         return withContext(Dispatchers.IO){
-            val response = retrofit.create(CareerApiClient::class.java).deleteCareer(id)
+            val response = retrofit.create(CourseApiClient::class.java).deleteCourse(id)
             if(response.isSuccessful)
                 response.body()!!
             else
@@ -38,9 +37,9 @@ class CareerService {
         }
     }
 
-    suspend fun updateCareer(id: Int, career: CareerModel): Boolean{
+    suspend fun updateCourse(id: Int, course: CourseModel): Boolean{
         return withContext(Dispatchers.IO){
-            val response = retrofit.create(CareerApiClient::class.java).updateCareer(id, career)
+            val response = retrofit.create(CourseApiClient::class.java).updateCourse(id, course)
             if(response.isSuccessful)
                 response.body()!!
             else

@@ -1,7 +1,7 @@
 package com.example.gestionacademicaapp.data.repository
 
-import com.example.gestionacademicaapp.data.model.UserModel
-import com.example.gestionacademicaapp.data.network.UserService
+import com.example.gestionacademicaapp.data.model.user.UserModel
+import com.example.gestionacademicaapp.data.network.user.UserService
 
 class UserRepository {
     companion object{

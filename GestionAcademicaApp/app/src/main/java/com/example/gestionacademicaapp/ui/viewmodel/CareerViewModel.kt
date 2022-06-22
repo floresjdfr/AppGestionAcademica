@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.repository.CareerRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class CareerViewModel : ViewModel() {

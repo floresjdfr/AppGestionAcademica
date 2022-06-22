@@ -3,7 +3,7 @@ package com.example.gestionacademicaapp.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gestionacademicaapp.data.model.UserModel
+import com.example.gestionacademicaapp.data.model.user.UserModel
 import com.example.gestionacademicaapp.data.repository.UserRepository
 import kotlinx.coroutines.launch
 

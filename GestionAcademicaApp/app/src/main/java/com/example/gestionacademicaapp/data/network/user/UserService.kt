@@ -1,7 +1,7 @@
-package com.example.gestionacademicaapp.data.network
+package com.example.gestionacademicaapp.data.network.user
 
 import com.example.gestionacademicaapp.core.RetrofitHelper
-import com.example.gestionacademicaapp.data.model.UserModel
+import com.example.gestionacademicaapp.data.model.user.UserModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

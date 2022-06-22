@@ -6,4 +6,4 @@ data class CareerCourseModel(
     var Cycle: Int,
     var Course: CourseModel,
     var Career: CareerModel,
-) : Base(), java.io.Serializable
+) : BaseModel(), java.io.Serializable

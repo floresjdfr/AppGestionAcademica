@@ -2,39 +2,35 @@ package com.example.gestionacademicaapp.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.gestionacademicaapp.data.model.CareerCourseModel
-import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.model.CourseModel
+import com.example.gestionacademicaapp.data.repository.CareerCoursesRepository
 import com.example.gestionacademicaapp.data.repository.CourseRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class CourseViewModel : ViewModel() {
-    val courses = MutableLiveData<ArrayList<CourseModel>>(ArrayList())
+    val careerCourses = MutableLiveData<ArrayList<CareerCourseModel>>(ArrayList())
     val isLoading = MutableLiveData<Boolean>()
-    suspend fun getCourses(id: Int) {
+    suspend fun getCareerCourses(id: Int) {
         isLoading.postValue(true)
-        val result = CourseRepository.getCourses(id)
-        courses.postValue(result)
-//        courses.value = result
+        val result = CareerCoursesRepository.getCareerCourses(id)
+        careerCourses.postValue(result)
         isLoading.postValue(false)
     }
 
-    suspend fun createCourse(careerCourseModel: CareerCourseModel) {
+    suspend fun createCareerCourse(careerCourseModel: CareerCourseModel): Boolean {
         isLoading.postValue(true)
-        var result = CourseRepository.createCourse(careerCourseModel)
+        var result = CareerCoursesRepository.createCareerCourse(careerCourseModel)
         isLoading.postValue(false)
+        return result
     }
 
-    suspend fun deleteCourse(id: Int): Boolean {
-        return CourseRepository.deleteCourse(id)
+    suspend fun deleteCareerCourse(careerCourseModel: CareerCourseModel): Boolean {
+        return CareerCoursesRepository.deleteCareerCourse(careerCourseModel.ID, careerCourseModel.Course.ID)
     }
 
-    suspend fun updateCourse(id: Int, career: CourseModel): Boolean {
+    suspend fun updateCareerCourse(careerCourseModel: CareerCourseModel): Boolean {
         isLoading.postValue(true)
-        var result = CourseRepository.updateCourse(id, career)
+        var result = CareerCoursesRepository.updateCareerCourse(careerCourseModel.ID, careerCourseModel)
         isLoading.postValue(false)
         return result
     }

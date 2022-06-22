@@ -1,5 +1,5 @@
 package com.example.gestionacademicaapp.data.model
 
-abstract class Base {
+abstract class BaseModel {
     abstract  var ID: Int
 }

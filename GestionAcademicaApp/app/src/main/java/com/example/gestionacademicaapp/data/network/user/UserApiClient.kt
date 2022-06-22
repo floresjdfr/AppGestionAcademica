@@ -1,6 +1,6 @@
-package com.example.gestionacademicaapp.data.network
+package com.example.gestionacademicaapp.data.network.user
 
-import com.example.gestionacademicaapp.data.model.UserModel
+import com.example.gestionacademicaapp.data.model.user.UserModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST

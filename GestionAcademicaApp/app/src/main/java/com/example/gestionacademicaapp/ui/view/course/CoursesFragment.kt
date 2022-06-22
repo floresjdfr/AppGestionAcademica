@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gestionacademicaapp.R
+import com.example.gestionacademicaapp.data.model.CareerCourseModel
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.model.CourseModel
 import com.example.gestionacademicaapp.databinding.FragmentCoursesBinding
@@ -53,14 +54,14 @@ class CoursesFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerViewElement)
 
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.getCourses(career.ID)
+            viewModel.getCareerCourses(career.ID)
         }
 
         return binding.root
     }
 
     private fun initObservers() {
-        viewModel.courses.observe(this) {
+        viewModel.careerCourses.observe(this) {
             initAdapter(it)
         }
 
@@ -69,18 +70,18 @@ class CoursesFragment : Fragment() {
         }
     }
 
-    private fun initAdapter(items: List<CourseModel>? = null) {
+    private fun initAdapter(items: List<CareerCourseModel>? = null) {
         val nCourseList = if (!items.isNullOrEmpty()) items else emptyList()
         adapter = CourseAdapterRecyclerView(nCourseList)
         recyclerViewElement.adapter = adapter
         adapter.setOnClickListener(object : CourseAdapterRecyclerView.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val course = adapter.getAtPosition(position)
-//                val bundle = Bundle()
-//                val fragment = CourseDetailsFragment()
+                val bundle = Bundle()
+                val fragment = CourseDetailsFragment()
 
-//                bundle.putSerializable("career", course)
-//                fragment.arguments = bundle
+                bundle.putSerializable("career", course)
+                fragment.arguments = bundle
 
                 activity?.toolbar?.title = "Course Information"
 //                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
@@ -149,8 +150,8 @@ class CoursesFragment : Fragment() {
             .setMessage("Are you sure you want to delete this item?")
             .setPositiveButton("Delete") { _: DialogInterface, _: Int ->
                 CoroutineScope(Dispatchers.Main).launch {
-                    var itemToDelete = adapter.getAtPosition(position)?.ID!!
-                    val response = viewModel.deleteCourse(itemToDelete)
+                    var itemToDelete = adapter.getAtPosition(position)
+                    val response = viewModel.deleteCareerCourse(itemToDelete!!)
                     if (response) {
                         adapter.deleteAtPosition(position)
                         adapter.notifyItemRemoved(position)

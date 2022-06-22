@@ -2,9 +2,7 @@ package com.example.gestionacademicaapp.data.repository
 
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.model.CareerProvider
-import com.example.gestionacademicaapp.data.model.UserModel
-import com.example.gestionacademicaapp.data.network.CareerService
-import com.example.gestionacademicaapp.data.network.UserService
+import com.example.gestionacademicaapp.data.network.career.CareerService
 
 class CareerRepository {
     companion object{

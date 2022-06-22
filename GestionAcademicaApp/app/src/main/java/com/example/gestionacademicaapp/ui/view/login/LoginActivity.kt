@@ -6,8 +6,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gestionacademicaapp.data.model.UserModel
-import com.example.gestionacademicaapp.data.model.UserType
+import com.example.gestionacademicaapp.data.model.user.UserModel
+import com.example.gestionacademicaapp.data.model.user.UserType
 import com.example.gestionacademicaapp.databinding.ActivityLoginBinding
 import com.example.gestionacademicaapp.ui.view.career.CareerActivity
 import com.example.gestionacademicaapp.ui.viewmodel.LoginViewModel
