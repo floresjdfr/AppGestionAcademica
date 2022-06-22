@@ -1,9 +1,7 @@
 package com.example.gestionacademicaapp.data.repository
 
 import com.example.gestionacademicaapp.data.model.CareerCourseModel
-import com.example.gestionacademicaapp.data.model.CourseModel
 import com.example.gestionacademicaapp.data.network.careerCourse.CareerCourseService
-import com.example.gestionacademicaapp.data.network.course.CourseService
 
 class CareerCoursesRepository {
     companion object {

@@ -1,4 +1,4 @@
-package com.example.gestionacademicaapp.ui.view.course
+package com.example.gestionacademicaapp.ui.view.cycle
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -18,9 +18,6 @@ import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.data.model.CareerCourseModel
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.databinding.FragmentCoursesBinding
-import com.example.gestionacademicaapp.ui.view.cycle.CourseAdapterRecyclerView
-import com.example.gestionacademicaapp.ui.view.cycle.CourseDetailsFragment
-import com.example.gestionacademicaapp.ui.view.cycle.CreateCourseFragment
 import com.example.gestionacademicaapp.ui.viewmodel.CourseViewModel
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.android.synthetic.main.nav_fragment_container.*

@@ -1,4 +1,4 @@
-package com.example.gestionacademicaapp.ui.view.course
+package com.example.gestionacademicaapp.ui.view.cycle
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.databinding.FragmentCourseDetailsBinding
-import com.example.gestionacademicaapp.ui.view.cycle.CourseInfoFragment
-import com.example.gestionacademicaapp.ui.view.cycle.CoursesFragment
 import kotlinx.android.synthetic.main.nav_fragment_container.*
 
 

@@ -2,7 +2,7 @@ package com.example.gestionacademicaapp.data.network.careerCourse
 
 import com.example.gestionacademicaapp.core.RetrofitHelper
 import com.example.gestionacademicaapp.data.model.CareerCourseModel
-import com.example.gestionacademicaapp.data.network.course.CourseApiClient
+import com.example.gestionacademicaapp.data.network.cycle.CycleApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -37,7 +37,7 @@ class CareerCourseService {
             var responseCourse: Response<Boolean>? = null
 
             if (responseCareerCourse.isSuccessful) {
-                responseCourse = retrofit.create(CourseApiClient::class.java).deleteCourse(idCourse)
+                responseCourse = retrofit.create(CycleApiClient::class.java).deleteCourse(idCourse)
                 if (responseCourse.isSuccessful)
                     responseCourse.body()!!
                 else
