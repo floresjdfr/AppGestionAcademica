@@ -18,9 +18,7 @@ import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.data.model.CareerCourseModel
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.databinding.FragmentCoursesBinding
-import com.example.gestionacademicaapp.ui.view.cycle.CourseAdapterRecyclerView
-import com.example.gestionacademicaapp.ui.view.cycle.CourseDetailsFragment
-import com.example.gestionacademicaapp.ui.view.cycle.CreateCourseFragment
+import com.example.gestionacademicaapp.ui.view.cycle.CreateCycleFragment
 import com.example.gestionacademicaapp.ui.viewmodel.CourseViewModel
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.android.synthetic.main.nav_fragment_container.*
@@ -80,13 +78,13 @@ class CoursesFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 val course = adapter.getAtPosition(position)
                 val bundle = Bundle()
-                val fragment = CourseDetailsFragment()
+                val fragment = CourseInfoFragment()
 
-                bundle.putSerializable("career", course)
+                bundle.putSerializable("course", course)
                 fragment.arguments = bundle
 
                 activity?.toolbar?.title = "Course Information"
-//                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
             }
         })
     }
@@ -94,7 +92,7 @@ class CoursesFragment : Fragment() {
     private fun initListeners() {
         binding.addCourse.setOnClickListener {
             val bundle = Bundle()
-            val fragment = CreateCourseFragment()
+            val fragment = CreateCycleFragment()
 
             bundle.putSerializable("career", career)
             fragment.arguments = bundle
@@ -136,9 +134,9 @@ class CoursesFragment : Fragment() {
             isCurrentlyActive: Boolean,
         ) {
             RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                .addSwipeLeftBackgroundColor(ContextCompat.getColor(context!!, R.color.secondaryDark))
+                .addSwipeLeftBackgroundColor(ContextCompat.getColor(context!!, R.color.primaryLight))
                 .addSwipeLeftActionIcon(R.drawable.ic_trash)
-                .addSwipeRightBackgroundColor(ContextCompat.getColor(context!!, R.color.primaryLight))
+                .addSwipeRightBackgroundColor(ContextCompat.getColor(context!!, R.color.secondaryDark))
                 .addSwipeRightActionIcon(R.drawable.ic_pencil)
                 .create()
                 .decorate()
@@ -178,6 +176,8 @@ class CoursesFragment : Fragment() {
 
                     val bundle = Bundle()
                     bundle.putSerializable("course", itemToEdit)
+                    bundle.putSerializable("career", career)
+
                     val fragment = CreateCourseFragment()
                     fragment.arguments = bundle
 

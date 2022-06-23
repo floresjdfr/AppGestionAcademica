@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -17,32 +18,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.data.model.CareerCourseModel
 import com.example.gestionacademicaapp.data.model.CareerModel
+import com.example.gestionacademicaapp.data.model.CycleModel
 import com.example.gestionacademicaapp.databinding.FragmentCoursesBinding
+import com.example.gestionacademicaapp.databinding.FragmentCyclesBinding
 import com.example.gestionacademicaapp.ui.viewmodel.CourseViewModel
+import com.example.gestionacademicaapp.ui.viewmodel.CycleViewModel
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.android.synthetic.main.nav_fragment_container.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CoursesFragment : Fragment() {
+class CyclesFragment : Fragment() {
 
     private lateinit var recyclerViewElement: RecyclerView
-    private lateinit var adapter: CourseAdapterRecyclerView
-    private lateinit var binding: FragmentCoursesBinding
-    private lateinit var career: CareerModel
-    private val viewModel: CourseViewModel by viewModels()
+    private lateinit var adapter: CycleAdapterRecyclerView
+    private lateinit var binding: FragmentCyclesBinding
+    private val viewModel: CycleViewModel by viewModels()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        binding = FragmentCyclesBinding.inflate(inflater, container, false)
 
-        binding = FragmentCoursesBinding.inflate(inflater, container, false)
-        career = arguments?.getSerializable("career") as CareerModel
-
-        recyclerViewElement = binding.courseRecyclerview
+        recyclerViewElement = binding.cycleRecyclerview
         recyclerViewElement.layoutManager = LinearLayoutManager(recyclerViewElement.context)
         recyclerViewElement.setHasFixedSize(true)
 
@@ -53,14 +54,14 @@ class CoursesFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerViewElement)
 
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.getCareerCourses(career.ID)
+            viewModel.getCycles()
         }
 
         return binding.root
     }
 
     private fun initObservers() {
-        viewModel.careerCourses.observe(this) {
+        viewModel.cycles.observe(this) {
             initAdapter(it)
         }
 
@@ -69,35 +70,23 @@ class CoursesFragment : Fragment() {
         }
     }
 
-    private fun initAdapter(items: List<CareerCourseModel>? = null) {
+    private fun initAdapter(items: List<CycleModel>? = null) {
         val nCourseList = if (!items.isNullOrEmpty()) items else emptyList()
-        adapter = CourseAdapterRecyclerView(nCourseList)
+        adapter = CycleAdapterRecyclerView(nCourseList)
         recyclerViewElement.adapter = adapter
-        adapter.setOnClickListener(object : CourseAdapterRecyclerView.OnItemClickListener {
+        adapter.setOnClickListener(object : CycleAdapterRecyclerView.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                val course = adapter.getAtPosition(position)
-                val bundle = Bundle()
-                val fragment = CourseDetailsFragment()
-
-                bundle.putSerializable("career", course)
-                fragment.arguments = bundle
-
-                activity?.toolbar?.title = "Course Information"
-//                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+                Toast.makeText(context!!, "Not Implemented", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun initListeners() {
-        binding.addCourse.setOnClickListener {
-            val bundle = Bundle()
-            val fragment = CreateCourseFragment()
+        binding.addCycle.setOnClickListener {
+            val fragment = CreateCycleFragment()
 
-            bundle.putSerializable("career", career)
-            fragment.arguments = bundle
-
-            activity?.toolbar?.title = "Create Course"
-            parentFragmentManager.beginTransaction().replace(R.id.career_details_container, fragment).commit()
+            activity?.toolbar?.title = "Create Cycle"
+            parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
         }
     }
 
@@ -133,9 +122,9 @@ class CoursesFragment : Fragment() {
             isCurrentlyActive: Boolean,
         ) {
             RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                .addSwipeLeftBackgroundColor(ContextCompat.getColor(context!!, R.color.secondaryDark))
+                .addSwipeLeftBackgroundColor(ContextCompat.getColor(context!!, R.color.primaryLight))
                 .addSwipeLeftActionIcon(R.drawable.ic_trash)
-                .addSwipeRightBackgroundColor(ContextCompat.getColor(context!!, R.color.primaryLight))
+                .addSwipeRightBackgroundColor(ContextCompat.getColor(context!!, R.color.secondaryDark))
                 .addSwipeRightActionIcon(R.drawable.ic_pencil)
                 .create()
                 .decorate()
@@ -150,7 +139,7 @@ class CoursesFragment : Fragment() {
             .setPositiveButton("Delete") { _: DialogInterface, _: Int ->
                 CoroutineScope(Dispatchers.Main).launch {
                     var itemToDelete = adapter.getAtPosition(position)
-                    val response = viewModel.deleteCareerCourse(itemToDelete!!)
+                    val response = viewModel.deleteCycle(itemToDelete!!)
                     if (response) {
                         adapter.deleteAtPosition(position)
                         adapter.notifyItemRemoved(position)

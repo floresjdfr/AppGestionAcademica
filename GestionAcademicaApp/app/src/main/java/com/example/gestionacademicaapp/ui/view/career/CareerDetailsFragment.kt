@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.databinding.FragmentCareerDetailsBinding
-import com.example.gestionacademicaapp.ui.view.cycle.CoursesFragment
+import com.example.gestionacademicaapp.ui.view.course.CoursesFragment
+import com.example.gestionacademicaapp.ui.view.cycle.CyclesFragment
 import kotlinx.android.synthetic.main.nav_fragment_container.*
 
 

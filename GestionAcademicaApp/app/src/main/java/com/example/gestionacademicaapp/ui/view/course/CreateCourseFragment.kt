@@ -84,7 +84,15 @@ class CreateCourseFragment : Fragment() {
                 val response = editCourse()
                 if (response) {
                     Toast.makeText(context, "Course edited!", Toast.LENGTH_SHORT).show()
-                    parentFragmentManager.beginTransaction().replace(R.id.fragment_container, CoursesFragment())
+
+                    val bundle = Bundle()
+                    bundle.putSerializable("career", career)
+
+                    val fragment = CoursesFragment()
+                    fragment.arguments = bundle
+
+
+                    parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
                         .commit()
                 } else {
                     Toast.makeText(context, "An error occurred while editing!", Toast.LENGTH_SHORT).show()

@@ -23,4 +23,8 @@
     <string name="courseCycleYear">Cycle Year</string>
     <string name="courseCycleNumber">Cycle Number</string>
     <string name="groups">Groups</string>
+    <string name="cycleYear">Cycle Year</string>
+    <string name="cycleNumber">Cycle Number</string>
+    <string name="cycleStartDate">Start Date</string>
+    <string name="cycleEndDate">End Date</string>
 </resources>

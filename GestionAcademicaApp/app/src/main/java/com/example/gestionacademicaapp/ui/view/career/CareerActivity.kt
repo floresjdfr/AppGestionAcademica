@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.databinding.ActivityCareerBinding
+import com.example.gestionacademicaapp.ui.view.cycle.CyclesFragment
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import kotlinx.android.synthetic.main.activity_career.*
 import kotlinx.android.synthetic.main.nav_fragment_container.*
@@ -52,6 +53,11 @@ class CareerActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CareersFragment())
                         .commit()
                 }
+                R.id.nav_item_cycle -> {
+                    toolbar.title = "Cycles"
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CyclesFragment())
+                        .commit()
+                }
             }
         }
 
@@ -63,6 +69,9 @@ class CareerActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_item_careers -> {
                     selectedOption = R.id.nav_item_careers
+                }
+                R.id.nav_item_cycle -> {
+                    selectedOption = R.id.nav_item_cycle
                 }
             }
             drawerLayout.closeDrawer(GravityCompat.START)

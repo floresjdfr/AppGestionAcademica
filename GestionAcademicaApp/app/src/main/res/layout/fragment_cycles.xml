@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".ui.view.cycle.CoursesFragment">
+    tools:context=".ui.view.cycle.CyclesFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addCourse"
+        android:id="@+id/addCycle"
         android:contentDescription="@string/new_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,13 +22,13 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/career_container"
+            android:id="@+id/cycle_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/course_recyclerview"
+                android:id="@+id/cycle_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="682dp" />
         </LinearLayout>

@@ -9,7 +9,7 @@ import com.example.gestionacademicaapp.data.model.CourseModel
 import com.example.gestionacademicaapp.databinding.FragmentCourseInfoBinding
 
 
-class CourseInfoFragment : Fragment() {
+class CycleInfoFragment : Fragment() {
     private lateinit var binding: FragmentCourseInfoBinding
     private lateinit var course: CourseModel
 
