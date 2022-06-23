@@ -1,11 +1,12 @@
 package com.example.gestionacademicaapp.data.repository
 
 import com.example.gestionacademicaapp.data.model.CourseModel
+import com.example.gestionacademicaapp.data.network.course.CourseService
 import com.example.gestionacademicaapp.data.network.cycle.CycleService
 
 class CourseRepository {
     companion object {
-        private val api = CycleService()
+        private val api = CourseService()
         suspend fun getCourses(id: Int): ArrayList<CourseModel> {
             return api.getCourses(id)
         }

@@ -11,7 +11,7 @@ class CourseService {
 
     suspend fun getCourses(id: Int): ArrayList<CourseModel> {
         return withContext(Dispatchers.IO) {
-            val response = retrofit.create(CycleApiClient::class.java).getCourses()
+            val response = retrofit.create(CourseApiClient::class.java).getCourses()
             if (response.isSuccessful)
                 response.body()!!
             else
@@ -20,7 +20,7 @@ class CourseService {
     }
     suspend fun createCourse(course: CourseModel): Boolean {
         return withContext(Dispatchers.IO) {
-            val response = retrofit.create(CycleApiClient::class.java).createCourse(course)
+            val response = retrofit.create(CourseApiClient::class.java).createCourse(course)
             if (response.isSuccessful)
                 response.body()!!
             else
@@ -30,7 +30,7 @@ class CourseService {
 
     suspend fun deleteCourse(id: Int): Boolean{
         return withContext(Dispatchers.IO){
-            val response = retrofit.create(CycleApiClient::class.java).deleteCourse(id)
+            val response = retrofit.create(CourseApiClient::class.java).deleteCourse(id)
             if(response.isSuccessful)
                 response.body()!!
             else
@@ -40,7 +40,7 @@ class CourseService {
 
     suspend fun updateCourse(id: Int, course: CourseModel): Boolean{
         return withContext(Dispatchers.IO){
-            val response = retrofit.create(CycleApiClient::class.java).updateCourse(id, course)
+            val response = retrofit.create(CourseApiClient::class.java).updateCourse(id, course)
             if(response.isSuccessful)
                 response.body()!!
             else

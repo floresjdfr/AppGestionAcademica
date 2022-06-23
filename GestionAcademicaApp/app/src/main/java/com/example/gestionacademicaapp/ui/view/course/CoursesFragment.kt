@@ -176,13 +176,13 @@ class CoursesFragment : Fragment() {
                 CoroutineScope(Dispatchers.Main).launch {
                     val itemToEdit = adapter.getAtPosition(position)!!
 
-//                    val bundle = Bundle()
-//                    bundle.putSerializable("career", itemToEdit)
-//                    val fragment = CreateCourseFragment()
-//                    fragment.arguments = bundle
+                    val bundle = Bundle()
+                    bundle.putSerializable("course", itemToEdit)
+                    val fragment = CreateCourseFragment()
+                    fragment.arguments = bundle
 
                     activity?.toolbar?.title = "Edit Course"
-//                    parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+                    parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
                 }
             }
             .setNegativeButton("Cancel") { _: DialogInterface, _: Int ->

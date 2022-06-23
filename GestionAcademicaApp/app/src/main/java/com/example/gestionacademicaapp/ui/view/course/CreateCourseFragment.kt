@@ -37,8 +37,9 @@ class CreateCourseFragment : Fragment() {
         if (courseArg != null)
             editCareerCourse = courseArg as CareerCourseModel
 
-        career = arguments?.getSerializable("career") as CareerModel
-
+        val careerArg = arguments?.getSerializable("career")
+        if (careerArg != null)
+            career = careerArg as CareerModel
 
         initObservers()
 
@@ -71,7 +72,8 @@ class CreateCourseFragment : Fragment() {
                 bundle.putSerializable("fragment", 2)
                 careerDetailsFragment.arguments = bundle
 
-                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, careerDetailsFragment).commit()
+                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, careerDetailsFragment)
+                    .commit()
             }
         }
     }
@@ -79,11 +81,11 @@ class CreateCourseFragment : Fragment() {
     private fun initEditListeners() {
         binding.createButton.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                var response = editCourse()
+                val response = editCourse()
                 if (response) {
                     Toast.makeText(context, "Course edited!", Toast.LENGTH_SHORT).show()
-//                    parentFragmentManager.beginTransaction().replace(R.id.fragment_container, CoursesFragment())
-//                        .commit()
+                    parentFragmentManager.beginTransaction().replace(R.id.fragment_container, CoursesFragment())
+                        .commit()
                 } else {
                     Toast.makeText(context, "An error occurred while editing!", Toast.LENGTH_SHORT).show()
                 }
@@ -91,10 +93,13 @@ class CreateCourseFragment : Fragment() {
         }
     }
 
-    private fun initEditFields(){
-//        binding.courseCode.editText?.setText(editCourse?.Code)
-//        binding.courseName.editText?.setText(editCourse?.CourseName)
-//        binding.courseTitle.editText?.setText(editCourse?.DegreeName)
+    private fun initEditFields() {
+        binding.courseCode.editText?.setText(editCareerCourse?.Course?.Code)
+        binding.courseName.editText?.setText(editCareerCourse?.Course?.Name)
+        binding.courseCredits.editText?.setText(editCareerCourse?.Course?.Credits.toString())
+        binding.courseHours.editText?.setText(editCareerCourse?.Course?.WeeklyHours.toString())
+        binding.courseCycleYear.editText?.setText(editCareerCourse?.Year.toString())
+        binding.courseCycleNumber.editText?.setText(editCareerCourse?.Cycle.toString())
     }
 
     private suspend fun createCourse() {
@@ -107,18 +112,24 @@ class CreateCourseFragment : Fragment() {
 
 
         val course = CourseModel(0, courseCode, courseName, courseCredits, courseHours)
-        val careerCourse = CareerCourseModel(0, courseCycleYear, courseCycleNumber,course, career)
+        val careerCourse = CareerCourseModel(0, courseCycleYear, courseCycleNumber, course, career)
         viewModel.createCareerCourse(careerCourse)
     }
 
     private suspend fun editCourse(): Boolean {
-//        val courseCode = binding.courseCode.editText?.text.toString()
-//        val courseName = binding.courseName.editText?.text.toString()
-//        val courseTitle = binding.courseTitle.editText?.text.toString()
+        val courseCode = binding.courseCode.editText?.text.toString()
+        val courseName = binding.courseName.editText?.text.toString()
+        val courseCredits = binding.courseCredits.editText?.text.toString().toInt()
+        val courseWeeklyHours = binding.courseHours.editText?.text.toString().toInt()
+        val cycleYear = binding.courseCycleYear.editText?.text.toString().toInt()
+        val cycleNumber = binding.courseCycleNumber.editText?.text.toString().toInt()
 
-//        editCourse?.Code = courseCode
-//        editCourse?.CourseName = courseName
-//        editCourse?.DegreeName = courseTitle
+        editCareerCourse?.Course?.Code = courseCode
+        editCareerCourse?.Course?.Name = courseName
+        editCareerCourse?.Course?.Credits = courseCredits
+        editCareerCourse?.Course?.WeeklyHours = courseWeeklyHours
+        editCareerCourse?.Year = cycleYear
+        editCareerCourse?.Cycle = cycleNumber
 
         return viewModel.updateCareerCourse(editCareerCourse!!)
     }
