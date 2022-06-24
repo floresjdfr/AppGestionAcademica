@@ -1,7 +1,7 @@
 package com.example.gestionacademicaapp.data.network.cycle
 
 import com.example.gestionacademicaapp.core.RetrofitHelper
-import com.example.gestionacademicaapp.data.model.CycleModel
+import com.example.gestionacademicaapp.data.model.cycle.CycleModel
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -10,14 +10,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CycleService {
     private val retrofit = RetrofitHelper.getRetrofit()
+    private val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+    private val retrofitDateFormatted = Retrofit.Builder().baseUrl("http://10.0.2.2:5000/api/")
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
 
     suspend fun getCycles(): ArrayList<CycleModel> {
         return withContext(Dispatchers.IO) {
 //            val response = retrofit.create(CycleApiClient::class.java).getCycles()
-            val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
-            val response = Retrofit.Builder().baseUrl("http://10.0.2.2:5000/api/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
+            val response = retrofitDateFormatted
                 .create(CycleApiClient::class.java)
                 .getCycles()
             if (response.isSuccessful)
@@ -26,7 +27,7 @@ class CycleService {
                 ArrayList()
         }
     }
-    
+
     suspend fun getCycleById(id: Int): CycleModel? {
         return withContext(Dispatchers.IO) {
             val response = retrofit.create(CycleApiClient::class.java).getCycleById(id)
@@ -36,13 +37,11 @@ class CycleService {
                 null
         }
     }
+
     suspend fun createCycle(cycle: CycleModel): Boolean {
         return withContext(Dispatchers.IO) {
 //            val response = retrofit.create(CycleApiClient::class.java).createCycle(cycle)
-            val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
-            val response = Retrofit.Builder().baseUrl("http://10.0.2.2:5000/api/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
+            val response = retrofitDateFormatted
                 .create(CycleApiClient::class.java)
                 .createCycle(cycle)
             if (response.isSuccessful)
@@ -52,20 +51,20 @@ class CycleService {
         }
     }
 
-    suspend fun deleteCycle(id: Int): Boolean{
-        return withContext(Dispatchers.IO){
+    suspend fun deleteCycle(id: Int): Boolean {
+        return withContext(Dispatchers.IO) {
             val response = retrofit.create(CycleApiClient::class.java).deleteCycle(id)
-            if(response.isSuccessful)
+            if (response.isSuccessful)
                 response.body()!!
             else
                 false
         }
     }
 
-    suspend fun updateCycle(id: Int, cycle: CycleModel): Boolean{
-        return withContext(Dispatchers.IO){
-            val response = retrofit.create(CycleApiClient::class.java).updateCycle(id, cycle)
-            if(response.isSuccessful)
+    suspend fun updateCycle(id: Int, cycle: CycleModel): Boolean {
+        return withContext(Dispatchers.IO) {
+            val response = retrofitDateFormatted.create(CycleApiClient::class.java).updateCycle(id, cycle)
+            if (response.isSuccessful)
                 response.body()!!
             else
                 false

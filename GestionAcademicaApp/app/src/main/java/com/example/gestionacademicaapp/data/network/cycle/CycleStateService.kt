@@ -1,7 +1,7 @@
 package com.example.gestionacademicaapp.data.network.cycle
 
 import com.example.gestionacademicaapp.core.RetrofitHelper
-import com.example.gestionacademicaapp.data.model.CycleStateModel
+import com.example.gestionacademicaapp.data.model.cycle.CycleStateModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

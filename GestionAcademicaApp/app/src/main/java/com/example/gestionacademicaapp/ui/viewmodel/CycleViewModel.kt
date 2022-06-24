@@ -2,9 +2,7 @@ package com.example.gestionacademicaapp.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.gestionacademicaapp.data.model.CareerCourseModel
-import com.example.gestionacademicaapp.data.model.CycleModel
-import com.example.gestionacademicaapp.data.repository.CareerCoursesRepository
+import com.example.gestionacademicaapp.data.model.cycle.CycleModel
 import com.example.gestionacademicaapp.data.repository.CycleRepository
 
 class CycleViewModel : ViewModel() {

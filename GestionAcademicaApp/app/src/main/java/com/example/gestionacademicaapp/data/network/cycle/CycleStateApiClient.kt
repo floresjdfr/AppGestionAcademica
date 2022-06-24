@@ -1,7 +1,6 @@
 package com.example.gestionacademicaapp.data.network.cycle
 
-import com.example.gestionacademicaapp.data.model.CourseModel
-import com.example.gestionacademicaapp.data.model.CycleStateModel
+import com.example.gestionacademicaapp.data.model.cycle.CycleStateModel
 import retrofit2.Response
 import retrofit2.http.*
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.gestionacademicaapp.R
-import com.example.gestionacademicaapp.data.model.CycleModel
+import com.example.gestionacademicaapp.data.model.cycle.CycleModel
 import kotlinx.android.synthetic.main.template_cycle.view.*
 
 class CycleAdapterRecyclerView(items: List<CycleModel>) : RecyclerView.Adapter<ViewHolder>() {

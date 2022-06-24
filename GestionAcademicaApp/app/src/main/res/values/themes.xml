@@ -18,7 +18,6 @@
         <item name="android:typeface">sans</item>
         <item name="floatingActionButtonStyle">@style/Theme.GestionAcademicaApp.FloatingButton</item>
         <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
-
     </style>
     
     <style name="Theme.GestionAcademicaApp.Button" parent="Widget.MaterialComponents.Button">
@@ -32,6 +31,15 @@
     <style name="Theme.GestionAcademicaApp.FloatingButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="backgroundTint">@color/primaryDark</item>
         <item name="tint">@color/white</item>
+    </style>
+
+    <style name="Theme.GestionAcademicaApp.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/grey_disabled_item</item>
+        <item name="android:textColorHint">@color/grey_disabled_item</item>
+    </style>
+
+    <style name="Theme.GestionAcademicaApp.AutoCompleteTextView" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textColor">@color/black_disabled_item</item>
     </style>
 
 </resources>

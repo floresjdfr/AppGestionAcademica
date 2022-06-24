@@ -1,6 +1,6 @@
 package com.example.gestionacademicaapp.data.repository
 
-import com.example.gestionacademicaapp.data.model.CycleModel
+import com.example.gestionacademicaapp.data.model.cycle.CycleModel
 import com.example.gestionacademicaapp.data.network.cycle.CycleService
 
 class CycleRepository {

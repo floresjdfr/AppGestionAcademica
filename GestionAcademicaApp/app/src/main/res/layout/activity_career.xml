@@ -7,6 +7,8 @@
     tools:context=".ui.view.career.CareerActivity"
     android:id="@+id/drawerLayout">
 
+
+
     <include layout="@layout/nav_fragment_container"/>
 
     <com.google.android.material.navigation.NavigationView

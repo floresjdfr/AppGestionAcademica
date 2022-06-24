@@ -16,12 +16,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gestionacademicaapp.R
-import com.example.gestionacademicaapp.data.model.CareerCourseModel
-import com.example.gestionacademicaapp.data.model.CareerModel
-import com.example.gestionacademicaapp.data.model.CycleModel
-import com.example.gestionacademicaapp.databinding.FragmentCoursesBinding
+import com.example.gestionacademicaapp.core.ViewMode
+import com.example.gestionacademicaapp.data.model.cycle.CycleModel
 import com.example.gestionacademicaapp.databinding.FragmentCyclesBinding
-import com.example.gestionacademicaapp.ui.viewmodel.CourseViewModel
 import com.example.gestionacademicaapp.ui.viewmodel.CycleViewModel
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.android.synthetic.main.nav_fragment_container.*
@@ -76,7 +73,17 @@ class CyclesFragment : Fragment() {
         recyclerViewElement.adapter = adapter
         adapter.setOnClickListener(object : CycleAdapterRecyclerView.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                Toast.makeText(context!!, "Not Implemented", Toast.LENGTH_SHORT).show()
+                val item = adapter.getAtPosition(position)!!
+                val bundle = Bundle()
+
+                bundle.putSerializable("cycle", item)
+                bundle.putSerializable("viewMode", ViewMode.VIEW)
+
+                val fragment = CreateCycleFragment()
+                fragment.arguments = bundle
+
+                activity?.toolbar?.title = "Cycle Details"
+                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
             }
         })
     }
@@ -162,13 +169,14 @@ class CyclesFragment : Fragment() {
                 CoroutineScope(Dispatchers.Main).launch {
                     val itemToEdit = adapter.getAtPosition(position)!!
 
-//                    val bundle = Bundle()
-//                    bundle.putSerializable("career", itemToEdit)
-//                    val fragment = CreateCourseFragment()
-//                    fragment.arguments = bundle
+                    val bundle = Bundle()
+                    bundle.putSerializable("cycle", itemToEdit)
+                    bundle.putSerializable("viewMode", ViewMode.EDIT)
+                    val fragment = CreateCycleFragment()
+                    fragment.arguments = bundle
 
-                    activity?.toolbar?.title = "Edit Course"
-//                    parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+                    activity?.toolbar?.title = "Edit Cycle"
+                    parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
                 }
             }
             .setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
