@@ -7,4 +7,13 @@
         android:id="@+id/nav_item_cycle"
         android:title="Cycles" />
 
+    <item
+        android:id="@+id/nav_item_teacher"
+        android:title="Teachers" />
+
+    <item
+        android:id="@+id/nav_item_student"
+        android:title="Students" />
+
+
 </menu>

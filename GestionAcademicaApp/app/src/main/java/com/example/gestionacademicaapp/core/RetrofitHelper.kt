@@ -1,11 +1,14 @@
 package com.example.gestionacademicaapp.core
 
+import com.example.gestionacademicaapp.core.utils.RetrofitUtils
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.time.Duration
 
 object RetrofitHelper {
+    private val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
     private fun getClient(): OkHttpClient = OkHttpClient
         .Builder()
         .addInterceptor(HeaderInterceptor())
@@ -14,8 +17,8 @@ object RetrofitHelper {
 
     fun getRetrofit(): Retrofit = Retrofit
         .Builder()
-        .baseUrl("http://10.0.2.2:5000/api/")
-        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(RetrofitUtils.baseUri)
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .client(getClient())
         .build()
 }

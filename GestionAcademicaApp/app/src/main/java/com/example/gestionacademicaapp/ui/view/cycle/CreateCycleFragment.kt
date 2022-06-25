@@ -13,12 +13,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.gestionacademicaapp.R
-import com.example.gestionacademicaapp.core.ViewMode
+import com.example.gestionacademicaapp.core.utils.enums.ViewMode
 import com.example.gestionacademicaapp.data.model.cycle.CycleModel
 import com.example.gestionacademicaapp.data.model.cycle.CycleStateModel
 import com.example.gestionacademicaapp.data.model.cycle.CycleStates
 import com.example.gestionacademicaapp.databinding.FragmentCreateCycleBinding
 import com.example.gestionacademicaapp.ui.viewmodel.CycleViewModel
+import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
@@ -101,14 +102,27 @@ class CreateCycleFragment : Fragment() {
         val startDate = cycle?.StartDate?.time ?: MaterialDatePicker.todayInUtcMilliseconds()
         val endDate = cycle?.EndDate?.time ?: MaterialDatePicker.todayInUtcMilliseconds()
 
+        val calendarStart = Calendar.getInstance()
+        val calendarEnd = Calendar.getInstance()
+        val currentYear = calendarStart.get(Calendar.YEAR)
+
+        calendarEnd.set(currentYear+5, 12, 31)
+
+        val startFrom = calendarStart.timeInMillis
+        val upTo = calendarEnd.timeInMillis
+        val constraints = CalendarConstraints.Builder().setStart(startFrom).setEnd(upTo).build()
+
+
         //Date pickers
         startDatePicker = MaterialDatePicker.Builder.datePicker()
             .setTitleText("Select Date")
+            .setCalendarConstraints(constraints)
             .setSelection(startDate)
             .build()
 
         endDatePicker = MaterialDatePicker.Builder.datePicker()
             .setTitleText("Select Date")
+            .setCalendarConstraints(constraints)
             .setSelection(endDate)
             .build()
 

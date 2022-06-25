@@ -1,6 +1,7 @@
 package com.example.gestionacademicaapp.data.network.cycle
 
 import com.example.gestionacademicaapp.core.RetrofitHelper
+import com.example.gestionacademicaapp.core.utils.RetrofitUtils
 import com.example.gestionacademicaapp.data.model.cycle.CycleModel
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class CycleService {
     private val retrofit = RetrofitHelper.getRetrofit()
     private val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
-    private val retrofitDateFormatted = Retrofit.Builder().baseUrl("http://10.0.2.2:5000/api/")
+    private val retrofitDateFormatted = Retrofit.Builder().baseUrl(RetrofitUtils.baseUri)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 

@@ -1,30 +1,31 @@
-package com.example.gestionacademicaapp.ui.view.career
+package com.example.gestionacademicaapp.ui.view
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import com.example.gestionacademicaapp.R
-import com.example.gestionacademicaapp.databinding.ActivityCareerBinding
+import com.example.gestionacademicaapp.databinding.ActivityMainBinding
+import com.example.gestionacademicaapp.ui.view.career.CareersFragment
 import com.example.gestionacademicaapp.ui.view.cycle.CyclesFragment
+import com.example.gestionacademicaapp.ui.view.student.StudentsFragment
+import com.example.gestionacademicaapp.ui.view.teacher.TeachersFragment
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
-import kotlinx.android.synthetic.main.activity_career.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_fragment_container.*
 import kotlinx.android.synthetic.main.nav_fragment_container.view.*
 
-class CareerActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCareerBinding
+    private lateinit var binding: ActivityMainBinding
     private var selectedOption = R.id.nav_item_careers
     private var toolbarText = "Careers"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityCareerBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.navView.toolbar)
 
@@ -58,6 +59,16 @@ class CareerActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CyclesFragment())
                         .commit()
                 }
+                R.id.nav_item_teacher -> {
+                    toolbar.title = "Teachers"
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, TeachersFragment())
+                        .commit()
+                }
+                R.id.nav_item_student -> {
+                    toolbar.title = "Students"
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, StudentsFragment())
+                        .commit()
+                }
             }
         }
 
@@ -72,6 +83,12 @@ class CareerActivity : AppCompatActivity() {
                 }
                 R.id.nav_item_cycle -> {
                     selectedOption = R.id.nav_item_cycle
+                }
+                R.id.nav_item_teacher -> {
+                    selectedOption = R.id.nav_item_teacher
+                }
+                R.id.nav_item_student -> {
+                    selectedOption = R.id.nav_item_student
                 }
             }
             drawerLayout.closeDrawer(GravityCompat.START)

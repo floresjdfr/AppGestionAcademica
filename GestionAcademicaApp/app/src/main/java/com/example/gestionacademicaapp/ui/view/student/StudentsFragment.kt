@@ -1,4 +1,4 @@
-package com.example.gestionacademicaapp.ui.view.cycle
+package com.example.gestionacademicaapp.ui.view.student
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -16,30 +16,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.core.utils.enums.ViewMode
-import com.example.gestionacademicaapp.data.model.cycle.CycleModel
-import com.example.gestionacademicaapp.databinding.FragmentCyclesBinding
-import com.example.gestionacademicaapp.ui.viewmodel.CycleViewModel
+import com.example.gestionacademicaapp.data.model.StudentModel
+import com.example.gestionacademicaapp.databinding.FragmentStudentsBinding
+import com.example.gestionacademicaapp.ui.viewmodel.StudentViewModel
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.android.synthetic.main.nav_fragment_container.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CyclesFragment : Fragment() {
+class StudentsFragment : Fragment() {
 
     private lateinit var recyclerViewElement: RecyclerView
-    private lateinit var adapter: CycleAdapterRecyclerView
-    private lateinit var binding: FragmentCyclesBinding
-    private val viewModel: CycleViewModel by viewModels()
-
-
+    private lateinit var adapter: StudentRecyclerViewAdapter
+    private lateinit var binding: FragmentStudentsBinding
+    private val viewModel: StudentViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentCyclesBinding.inflate(inflater, container, false)
+        binding = FragmentStudentsBinding.inflate(inflater, container, false)
 
-        recyclerViewElement = binding.cycleRecyclerview
+        recyclerViewElement = binding.recyclerView
         recyclerViewElement.layoutManager = LinearLayoutManager(recyclerViewElement.context)
         recyclerViewElement.setHasFixedSize(true)
 
@@ -50,14 +48,14 @@ class CyclesFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerViewElement)
 
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.getCycles()
+            viewModel.getStudents()
         }
 
         return binding.root
     }
 
     private fun initObservers() {
-        viewModel.cycles.observe(this) {
+        viewModel.students.observe(this) {
             initAdapter(it)
         }
 
@@ -66,32 +64,32 @@ class CyclesFragment : Fragment() {
         }
     }
 
-    private fun initAdapter(items: List<CycleModel>? = null) {
+    private fun initAdapter(items: List<StudentModel>? = null) {
         val nCourseList = if (!items.isNullOrEmpty()) items else emptyList()
-        adapter = CycleAdapterRecyclerView(nCourseList)
+        adapter = StudentRecyclerViewAdapter(nCourseList)
         recyclerViewElement.adapter = adapter
-        adapter.setOnClickListener(object : CycleAdapterRecyclerView.OnItemClickListener {
+        adapter.setOnClickListener(object : StudentRecyclerViewAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val item = adapter.getAtPosition(position)!!
                 val bundle = Bundle()
 
-                bundle.putSerializable("cycle", item)
+                bundle.putSerializable("student", item)
                 bundle.putSerializable("viewMode", ViewMode.VIEW)
 
-                val fragment = CreateCycleFragment()
+                val fragment = StudentFormFragment()
                 fragment.arguments = bundle
 
-                activity?.toolbar?.title = "Cycle Details"
+                activity?.toolbar?.title = "Student Details"
                 parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
             }
         })
     }
 
     private fun initListeners() {
-        binding.addCycle.setOnClickListener {
-            val fragment = CreateCycleFragment()
+        binding.addStudent.setOnClickListener {
+            val fragment = StudentFormFragment()
 
-            activity?.toolbar?.title = "Create Cycle"
+            activity?.toolbar?.title = "Create Student"
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
         }
     }
@@ -145,7 +143,7 @@ class CyclesFragment : Fragment() {
             .setPositiveButton("Delete") { _: DialogInterface, _: Int ->
                 CoroutineScope(Dispatchers.Main).launch {
                     var itemToDelete = adapter.getAtPosition(position)
-                    val response = viewModel.deleteCycle(itemToDelete!!)
+                    val response = viewModel.deleteStudent(itemToDelete!!)
                     if (response) {
                         adapter.deleteAtPosition(position)
                         adapter.notifyItemRemoved(position)
@@ -169,12 +167,12 @@ class CyclesFragment : Fragment() {
                     val itemToEdit = adapter.getAtPosition(position)!!
 
                     val bundle = Bundle()
-                    bundle.putSerializable("cycle", itemToEdit)
+                    bundle.putSerializable("student", itemToEdit)
                     bundle.putSerializable("viewMode", ViewMode.EDIT)
-                    val fragment = CreateCycleFragment()
+                    val fragment = StudentFormFragment()
                     fragment.arguments = bundle
 
-                    activity?.toolbar?.title = "Edit Cycle"
+                    activity?.toolbar?.title = "Edit Student"
                     parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
                 }
             }

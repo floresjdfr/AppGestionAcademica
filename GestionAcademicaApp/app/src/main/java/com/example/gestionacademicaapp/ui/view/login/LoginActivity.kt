@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.gestionacademicaapp.data.model.user.UserModel
 import com.example.gestionacademicaapp.data.model.user.UserType
 import com.example.gestionacademicaapp.databinding.ActivityLoginBinding
-import com.example.gestionacademicaapp.ui.view.career.CareerActivity
+import com.example.gestionacademicaapp.ui.view.MainActivity
 import com.example.gestionacademicaapp.ui.viewmodel.LoginViewModel
 
 
@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.isLogged.observe(this){
             if(it){
                 Toast.makeText(this, "Logged", Toast.LENGTH_SHORT).show()
-                var intent = Intent(this, CareerActivity::class.java)
+                var intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }

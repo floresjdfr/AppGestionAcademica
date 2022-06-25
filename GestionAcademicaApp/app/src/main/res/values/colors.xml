@@ -14,5 +14,5 @@
     <color name="secondary">#CCCCCC</color>
     <color name="secondaryDark">#869D96</color>
 
-    <color name="disabled">#919191</color>
+    <color name="disabled">#808080</color>
 </resources>
