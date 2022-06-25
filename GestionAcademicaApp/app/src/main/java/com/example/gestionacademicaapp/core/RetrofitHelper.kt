@@ -12,7 +12,7 @@ object RetrofitHelper {
     private fun getClient(): OkHttpClient = OkHttpClient
         .Builder()
         .addInterceptor(HeaderInterceptor())
-        .callTimeout(Duration.ofSeconds(15))
+        .callTimeout(Duration.ofSeconds(500))
         .build()
 
     fun getRetrofit(): Retrofit = Retrofit

@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.core.utils.enums.ViewMode
 import com.example.gestionacademicaapp.data.model.TeacherModel
+import com.example.gestionacademicaapp.data.model.user.EnumUserType
 import com.example.gestionacademicaapp.data.model.user.UserModel
 import com.example.gestionacademicaapp.data.model.user.UserType
 import com.example.gestionacademicaapp.databinding.FragmentTeacherFormBinding
@@ -76,7 +77,7 @@ class TeacherFormFragment : Fragment() {
         val teacherEmail = binding.teacherEmail.editText?.text.toString()
         val password = binding.teacherPassword.editText?.text.toString()
 
-        val user = UserModel(0, teacherId, password, UserType(""))
+        val user = UserModel(0, teacherId, password, UserType(EnumUserType.Profesor.id,""))
 
         return TeacherModel(0, teacherId, teacherName, teacherPhone, teacherEmail, user)
     }

@@ -6,6 +6,7 @@ import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.model.StudentModel
 import com.example.gestionacademicaapp.data.repository.CareerRepository
 import com.example.gestionacademicaapp.data.repository.StudentRepository
+import com.example.gestionacademicaapp.data.repository.UserRepository
 
 class StudentViewModel: ViewModel() {
     val students = MutableLiveData<ArrayList<StudentModel>>(ArrayList())
@@ -28,8 +29,13 @@ class StudentViewModel: ViewModel() {
     }
 
     suspend fun deleteStudent(student: StudentModel): Boolean {
+        var result = false
         isLoading.postValue(true)
-        val result = StudentRepository.deleteStudent(student.ID)
+
+        result = StudentRepository.deleteStudent(student.ID)
+        if(result)//StudentDeleted
+            UserRepository.deleteUser(student.User?.ID!!)//Then delete user
+
         isLoading.postValue(false)
         return result
     }

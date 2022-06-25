@@ -15,6 +15,7 @@ import com.example.gestionacademicaapp.R
 import com.example.gestionacademicaapp.core.utils.enums.ViewMode
 import com.example.gestionacademicaapp.data.model.CareerModel
 import com.example.gestionacademicaapp.data.model.StudentModel
+import com.example.gestionacademicaapp.data.model.user.EnumUserType
 import com.example.gestionacademicaapp.data.model.user.UserModel
 import com.example.gestionacademicaapp.data.model.user.UserType
 import com.example.gestionacademicaapp.databinding.FragmentStudentFormBinding
@@ -36,7 +37,7 @@ class StudentFormFragment : Fragment() {
     private lateinit var binding: FragmentStudentFormBinding
     private val viewModel: StudentViewModel by viewModels()
     private var student: StudentModel? = null
-    private lateinit var career: CareerModel
+    private var career: CareerModel? = null
     private lateinit var viewMode: ViewMode
     private val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.US)
     private lateinit var datePicker: MaterialDatePicker<Long>
@@ -137,7 +138,7 @@ class StudentFormFragment : Fragment() {
     private val dropdownOnClickListener =
         OnItemClickListener { _, _, position, _ ->
             career = viewModel.careers.value?.get(position)!!
-            println("Career selected: ${career.CareerName}")
+            println("Career selected: ${career?.CareerName}")
         }
 
     private fun getCareers(){
@@ -154,7 +155,7 @@ class StudentFormFragment : Fragment() {
         val password = binding.studentPassword.editText?.text.toString()
         val dateOfBirth = dateFormat.parse(binding.studentDateOfBirth.editText?.text.toString())
 
-        val user = UserModel(0, studentId, password, UserType(""))
+        val user = UserModel(0, studentId, password, UserType(EnumUserType.Alumno.id,""))
 
         return StudentModel(0, studentId, studentName, studentPhone, studentEmail, dateOfBirth!!, user, null)
     }
@@ -164,6 +165,7 @@ class StudentFormFragment : Fragment() {
         binding.studentName.editText?.setText(student?.Name)
         binding.studentPhone.editText?.setText(student?.PhoneNumber)
         binding.studentEmail.editText?.setText(student?.Email)
+        binding.studentDateOfBirth.editText?.setText(dateFormat.format(student?.DateOfBirth!!))
     }
 
     //<editor-fold desc="Create Student">
@@ -206,12 +208,14 @@ class StudentFormFragment : Fragment() {
                 }
             }
         }
+        binding.autoComplete.onItemClickListener = dropdownOnClickListener
 
         initDatePickersListeners()
     }
 
     private fun initEditFields() {
         binding.studentID.editText?.focusable = View.NOT_FOCUSABLE
+        binding.autoComplete.setText(student?.Career?.CareerName, false)
 
         setStudentFormFields()
     }
@@ -223,7 +227,9 @@ class StudentFormFragment : Fragment() {
         this.student?.Name = student.Name
         this.student?.PhoneNumber = student.PhoneNumber
         this.student?.Email = student.Email
-        this.student?.User = student.User
+        this.student?.User?.Password = student.User?.Password!!
+        if(career != null)
+            this.student?.Career = career
 
         return viewModel.updateStudent(this.student!!)
     }

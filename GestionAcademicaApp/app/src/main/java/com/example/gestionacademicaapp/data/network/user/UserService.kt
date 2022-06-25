@@ -17,4 +17,24 @@ class UserService {
                 null
         }
     }
+
+    suspend fun updateUser(id: Int, user: UserModel): Boolean {
+        return withContext(Dispatchers.IO) {
+            val response = retrofit.create(UserApiClient::class.java).updateUser(id, user)
+            if (response.isSuccessful)
+                response.body()!!
+            else
+                false
+        }
+    }
+
+    suspend fun deleteUser(id: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            val response = retrofit.create(UserApiClient::class.java).deleteUser(id)
+            if (response.isSuccessful)
+                response.body()!!
+            else
+                false
+        }
+    }
 }

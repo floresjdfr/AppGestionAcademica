@@ -142,7 +142,7 @@ class StudentsFragment : Fragment() {
             .setMessage("Are you sure you want to delete this item?")
             .setPositiveButton("Delete") { _: DialogInterface, _: Int ->
                 CoroutineScope(Dispatchers.Main).launch {
-                    var itemToDelete = adapter.getAtPosition(position)
+                    val itemToDelete = adapter.getAtPosition(position)
                     val response = viewModel.deleteStudent(itemToDelete!!)
                     if (response) {
                         adapter.deleteAtPosition(position)

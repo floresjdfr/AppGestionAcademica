@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         val username = binding.usernameTI.editText?.text.toString()
         val password = binding.passwordTI.editText?.text.toString()
 
-        val user = UserModel(0, username, password, UserType(""))
+        val user = UserModel(0, username, password, UserType(0,""))
 
         loginViewModel.login(user)
     }

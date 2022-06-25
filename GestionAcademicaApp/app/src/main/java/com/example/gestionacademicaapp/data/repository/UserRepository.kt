@@ -10,5 +10,13 @@ class UserRepository {
         suspend fun login(user: UserModel): UserModel?{
             return api.login(user)
         }
+
+        suspend fun deleteUser(id: Int): Boolean {
+            return UserRepository.api.deleteUser(id)
+        }
+
+        suspend fun updateUser(id: Int, user: UserModel): Boolean {
+            return UserRepository.api.updateUser(id, user)
+        }
     }
 }

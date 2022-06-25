@@ -1,3 +1,5 @@
 package com.example.gestionacademicaapp.data.model.user
 
-data class UserType(var TypeDescription: String)
+import com.example.gestionacademicaapp.data.model.BaseModel
+
+data class UserType(override var ID: Int, var TypeDescription: String): BaseModel(), java.io.Serializable
