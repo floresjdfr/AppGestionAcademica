@@ -46,6 +46,8 @@
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_create_course.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_create_cycle.xml" value="0.264" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_cycles.xml" value="0.1680327868852459" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_group_form.xml" value="0.4" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_groups.xml" value="0.16927083333333334" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_student_form.xml" value="0.4" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_students.xml" value="0.1" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_teacher_form.xml" value="0.4" />
@@ -57,6 +59,7 @@
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/nav_header.xml" value="0.4" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_cycle.xml" value="0.44966442953020136" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_dropdown_item.xml" value="0.536" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_group.xml" value="0.4" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_student.xml" value="0.4" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_teacher.xml" value="0.264" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_user.xml" value="0.1" />
