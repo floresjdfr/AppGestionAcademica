@@ -7,8 +7,15 @@ class UserRepository {
     companion object{
         private val api = UserService()
 
+        suspend fun getUsers(): ArrayList<UserModel>{
+            return api.getUsers()
+        }
         suspend fun login(user: UserModel): UserModel?{
             return api.login(user)
+        }
+
+        suspend fun createUser(user: UserModel): Boolean{
+            return api.createUser(user)
         }
 
         suspend fun deleteUser(id: Int): Boolean {

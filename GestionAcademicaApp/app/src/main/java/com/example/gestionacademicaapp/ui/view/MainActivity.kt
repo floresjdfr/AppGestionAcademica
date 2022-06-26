@@ -12,6 +12,7 @@ import com.example.gestionacademicaapp.ui.view.career.CareersFragment
 import com.example.gestionacademicaapp.ui.view.cycle.CyclesFragment
 import com.example.gestionacademicaapp.ui.view.student.StudentsFragment
 import com.example.gestionacademicaapp.ui.view.teacher.TeachersFragment
+import com.example.gestionacademicaapp.ui.view.user.UsersFragment
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_fragment_container.*
@@ -69,6 +70,11 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container, StudentsFragment())
                         .commit()
                 }
+                R.id.nav_item_user -> {
+                    toolbar.title = "Users"
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, UsersFragment())
+                        .commit()
+                }
             }
         }
 
@@ -89,6 +95,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_item_student -> {
                     selectedOption = R.id.nav_item_student
+                }
+                R.id.nav_item_user -> {
+                    selectedOption = R.id.nav_item_user
                 }
             }
             drawerLayout.closeDrawer(GravityCompat.START)

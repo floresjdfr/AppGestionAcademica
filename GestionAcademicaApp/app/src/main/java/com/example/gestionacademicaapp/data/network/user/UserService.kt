@@ -8,6 +8,16 @@ import kotlinx.coroutines.withContext
 class UserService {
     private val retrofit = RetrofitHelper.getRetrofit()
 
+    suspend fun getUsers(): ArrayList<UserModel> {
+        return withContext(Dispatchers.IO) {
+            val response = retrofit.create(UserApiClient::class.java).getUsers()
+            if (response.isSuccessful)
+                response.body()!!
+            else
+                ArrayList()
+        }
+    }
+
     suspend fun login(user: UserModel): UserModel? {
         return withContext(Dispatchers.IO) {
             val response = retrofit.create(UserApiClient::class.java).login(user)
@@ -15,6 +25,16 @@ class UserService {
                 response.body()
             else
                 null
+        }
+    }
+
+    suspend fun createUser(user: UserModel): Boolean {
+        return withContext(Dispatchers.IO) {
+            val response = retrofit.create(UserApiClient::class.java).createUser(user)
+            if (response.isSuccessful)
+                response.body()!!
+            else
+                false
         }
     }
 

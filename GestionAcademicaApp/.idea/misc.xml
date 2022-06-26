@@ -47,9 +47,11 @@
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_create_cycle.xml" value="0.264" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_cycles.xml" value="0.1680327868852459" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_student_form.xml" value="0.4" />
-        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_students.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_students.xml" value="0.1" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_teacher_form.xml" value="0.4" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_teachers.xml" value="0.14628623188405798" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_user_form.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_users.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/nav_content.xml" value="0.16052631578947368" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/nav_fragment_container.xml" value="0.10164473684210526" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/nav_header.xml" value="0.4" />
@@ -57,6 +59,7 @@
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_dropdown_item.xml" value="0.536" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_student.xml" value="0.4" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_teacher.xml" value="0.264" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/template_user.xml" value="0.1" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/career/layout/activity_career.xml" value="0.25" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/career/layout/fragment_careers.xml" value="0.15164473684210528" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/career/layout/fragment_create_career.xml" value="0.176" />

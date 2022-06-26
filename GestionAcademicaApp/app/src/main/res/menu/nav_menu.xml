@@ -15,5 +15,8 @@
         android:id="@+id/nav_item_student"
         android:title="Students" />
 
+    <item
+        android:id="@+id/nav_item_user"
+        android:title="Users" />
 
 </menu>
