@@ -78,7 +78,7 @@ class CoursesFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 val course = adapter.getAtPosition(position)
                 val bundle = Bundle()
-                val fragment = CourseInfoFragment()
+                val fragment = CourseDetailsFragment()
 
                 bundle.putSerializable("course", course)
                 fragment.arguments = bundle

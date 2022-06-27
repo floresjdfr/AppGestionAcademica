@@ -8,16 +8,17 @@ import com.example.gestionacademicaapp.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
-    val user = MutableLiveData<UserModel>()
+    val loggedUser = MutableLiveData<UserModel>()
     val isLogged = MutableLiveData<Boolean>()
 
-    fun login(user: UserModel) {
-        viewModelScope.launch {
-            var result = UserRepository.login(user)
-            if(result != null)
+    suspend fun login(user: UserModel) {
+            val result = UserRepository.login(user)
+            if(result != null){
+                loggedUser.value = result
                 isLogged.postValue(true)
+
+            }
             else
                 isLogged.postValue(false)
-        }
     }
 }

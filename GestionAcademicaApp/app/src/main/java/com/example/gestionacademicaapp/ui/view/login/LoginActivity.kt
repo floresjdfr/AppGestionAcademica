@@ -11,6 +11,9 @@ import com.example.gestionacademicaapp.data.model.user.UserType
 import com.example.gestionacademicaapp.databinding.ActivityLoginBinding
 import com.example.gestionacademicaapp.ui.view.MainActivity
 import com.example.gestionacademicaapp.ui.viewmodel.LoginViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class LoginActivity : AppCompatActivity() {
@@ -26,7 +29,13 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.isLogged.observe(this){
             if(it){
                 Toast.makeText(this, "Logged", Toast.LENGTH_SHORT).show()
-                var intent = Intent(this, MainActivity::class.java)
+
+                val intent = Intent(this, MainActivity::class.java)
+                val bundle = Bundle()
+
+                bundle.putSerializable("loggedUser", loginViewModel.loggedUser.value)
+                intent.putExtras(bundle)
+
                 startActivity(intent)
                 finish()
             }
@@ -34,6 +43,8 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Wrong username or password", Toast.LENGTH_SHORT).show()
             }
         }
+
+
     }
 
 
@@ -43,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
 
         val user = UserModel(0, username, password, UserType(0,""))
 
-        loginViewModel.login(user)
+        CoroutineScope(Dispatchers.Main).launch {
+            loginViewModel.login(user)
+        }
     }
 }

@@ -80,7 +80,8 @@ class GroupsFragment : Fragment() {
                 val item = adapter.getAtPosition(position)!!
                 val bundle = Bundle()
 
-                bundle.putSerializable("group", item)
+                bundle.putSerializable("group", item.Group)
+                bundle.putSerializable("course", item.Course)
                 bundle.putSerializable("viewMode", ViewMode.VIEW)
 
                 val fragment = GroupFormFragment()
@@ -95,7 +96,11 @@ class GroupsFragment : Fragment() {
 
     private fun initListeners() {
         binding.addGroup.setOnClickListener {
+            val bundle = Bundle()
             val fragment = GroupFormFragment()
+
+            bundle.putSerializable("course", course)
+            fragment.arguments = bundle
 
             activity?.toolbar?.title = "Create Group"
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null)
@@ -176,7 +181,8 @@ class GroupsFragment : Fragment() {
                     val itemToEdit = adapter.getAtPosition(position)!!
 
                     val bundle = Bundle()
-                    bundle.putSerializable("group", itemToEdit)
+                    bundle.putSerializable("group", itemToEdit.Group)
+                    bundle.putSerializable("course", itemToEdit.Course)
                     bundle.putSerializable("viewMode", ViewMode.EDIT)
                     val fragment = GroupFormFragment()
                     fragment.arguments = bundle

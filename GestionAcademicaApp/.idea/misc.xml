@@ -39,6 +39,7 @@
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/drawable/ic_login.xml" value="0.1" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/drawable/ic_save.xml" value="0.1707236842105263" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/activity_career.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/activity_login.xml" value="0.15208333333333332" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_career_info.xml" value="0.2033514492753623" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_course_details.xml" value="0.23278985507246377" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layout/fragment_course_info.xml" value="0.23278985507246377" />
@@ -70,6 +71,7 @@
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/login/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/navdrawer/layout/nav_fragment_container.xml" value="0.16052631578947368" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/layouts/navdrawer/layout/nav_header.xml" value="0.23157894736842105" />
+        <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/menu/bottom_nav_course.xml" value="0.26461538461538464" />
         <entry key="..\:/Users/flore/Documents/WorkingProjects/AppGestionAcademica/GestionAcademicaApp/app/src/main/res/menu/nav_menu.xml" value="0.16973684210526316" />
       </map>
     </option>
